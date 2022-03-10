@@ -2,7 +2,6 @@ import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
-  IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -10,10 +9,12 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { home, add, person } from 'ionicons/icons';
+import { home, paw, add, person, menu } from 'ionicons/icons';
 import Home from './pages/Home';
+import Walks from "./pages/Walks";
 import Add from './pages/Add';
 import Profile from './pages/Profile';
+import Menu from "./pages/Menu";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -44,11 +45,17 @@ const App: React.FC = () => (
           <Route exact path="/home">
             <Home />
           </Route>
+          <Route exact path="/walks">
+            <Walks />
+          </Route>
           <Route exact path="/add">
             <Add />
           </Route>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/menu">
+            <Menu />
           </Route>
           <Route exact path="/">
             <Redirect to="/home" />
@@ -57,15 +64,18 @@ const App: React.FC = () => (
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={home} />
-            <IonLabel>Home</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="walks" href="/walks">
+            <IonIcon icon={paw} />
           </IonTabButton>
           <IonTabButton tab="add" href="/add">
             <IonIcon icon={add} />
-            <IonLabel>Add</IonLabel>
           </IonTabButton>
           <IonTabButton tab="profile" href="/profile">
             <IonIcon icon={person} />
-            <IonLabel>Profile</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="menu" href="/menu">
+            <IonIcon icon={menu} />
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
