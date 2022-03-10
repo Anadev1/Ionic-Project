@@ -15,6 +15,7 @@ import Walks from "./pages/Walks";
 import Add from './pages/Add';
 import Profile from './pages/Profile';
 import Menu from "./pages/Menu";
+import Start from "./pages/Start";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -57,9 +58,14 @@ const App: React.FC = () => (
           <Route path="/menu">
             <Menu />
           </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
+
+          <Route path="/start">
+            <Start />
           </Route>
+          <Route exact path="/">
+            <Redirect to="/start" />
+          </Route>
+          
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">

@@ -1,0 +1,49 @@
+.post-image {
+    width: 100%;
+}
+
+.start-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4em 2em;
+    background-color: var(--ion-color-primary-background);
+    z-index: 1000;
+}
+
+.start-headline {
+    font-family: PermanentMarker, sans-serif;
+    font-size: 2.5em;
+    color: var( --ion-color-primary-text);
+    margin: 0;
+}
+
+.start-text {
+    font-family: Lato, sans-serif;
+    font-size: 1.2em;
+    color: var( --ion-color-primary-text);
+    margin: 0;
+    padding: 1em 0 4em;
+}
+
+.signup-btn {
+    width: 100%;
+    height: 3em;
+    color: var(--ion-color-primary-background);
+    background: var(--ion-color-primary);
+    font-family: Lato, sans-serif;
+    font-size: 1.25em;
+    margin-bottom: 1em;
+    border-radius: 10px;
+}
+
+.login-btn {
+    width: 100%;
+    height: 3em;
+    color: var(--ion-color-primary);
+    border: 1px solid var(--ion-color-primary);
+    background: var(--ion-color-primary-background);
+    font-family: Lato, sans-serif;
+    font-size: 1.25em;
+    border-radius: 10px;
+}
