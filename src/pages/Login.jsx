@@ -5,8 +5,8 @@ import {
     IonPage,
     IonButton,
     IonItem,
-    IonLabel,
     IonInput,
+    IonText,
   
 } from "@ionic/react";
 import LoginImg from "../images/login.jpg";
@@ -46,7 +46,6 @@ export default function Login() {
         </div>
         <form onSubmit={handleSubmit}>
           <IonItem>
-            <IonLabel position="stacked">Mail</IonLabel>
             <IonInput
               value={mail}
               type="email"
@@ -55,7 +54,6 @@ export default function Login() {
             />
           </IonItem>
           <IonItem>
-            <IonLabel position="stacked">Password</IonLabel>
             <IonInput
               value={password}
               type="password"
@@ -68,14 +66,14 @@ export default function Login() {
               Log in
             </IonButton>
           </div>
-          <div className="ion-text-center">
-            <IonButton
-              size="small"
-              fill="clear"
+          <div className="login-container">
+            <p className="login-text">Don't have an account?</p>
+            <IonText
+              class="login-button"
               onClick={() => history.replace("/signup")}
             >
-              Don't have an account? <b>Sign up</b>
-            </IonButton>
+              Sign up
+            </IonText>
           </div>
         </form>
       </IonContent>

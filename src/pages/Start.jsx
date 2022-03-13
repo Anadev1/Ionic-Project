@@ -35,7 +35,7 @@ export default function Start() {
           <div className="ion-padding">
             <IonButton
               expand="block"
-              fill="clear"
+              fill="outline"
               onClick={() => history.replace("/login")}
             >
               Log in
