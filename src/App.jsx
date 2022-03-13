@@ -131,7 +131,7 @@ export default function App() {
           {userIsAuthenticated ? (
             <Redirect to="/home" />
           ) : (
-            <Redirect to="/login" />
+            <Redirect to="/start" />
           )}
         </Route>
       </IonReactRouter>
