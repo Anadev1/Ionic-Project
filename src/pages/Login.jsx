@@ -41,6 +41,9 @@ export default function Login() {
         <IonImg className="post-img" src={LoginImg} />
       </IonHeader>
       <IonContent fullscreen>
+        <div className="start-container">
+          <h2 className="start-headline">Login</h2>
+        </div>
         <form onSubmit={handleSubmit}>
           <IonItem>
             <IonLabel position="stacked">Mail</IonLabel>

@@ -26,36 +26,35 @@ export default function Signup() {
       <IonHeader>
         <IonImg className="post-img" src={SignupImg} />
       </IonHeader>
-      <IonContent>
+      <IonContent fullscreen>
         <div className="start-container">
           <h2 className="start-headline">Sign up</h2>
-          <form onSubmit={handleSubmit}>
-            <IonItem>
-              <IonLabel position="stacked">Email</IonLabel>
-              <IonInput
-                value={mail}
-                type="email"
-                placeholder="Email"
-                onIonChange={e => setMail(e.target.value)}
-              />
-            </IonItem>
-            <IonItem>
-              <IonLabel position="stacked">Password</IonLabel>
-              <IonInput
-                value={password}
-                type="password"
-                placeholder="Password"
-                onIonChange={e => setPassword(e.target.value)}
-              />
-            </IonItem>
-            <div className="ion-padding">
-              <IonButton type="submit" expand="block">
-                Sign up
-              </IonButton>
-            </div>
-  
-          </form>
         </div>
+        <form onSubmit={handleSubmit}>
+          <IonItem>
+            <IonLabel position="stacked">Email</IonLabel>
+            <IonInput
+              value={mail}
+              type="email"
+              placeholder="Email"
+              onIonChange={(e) => setMail(e.target.value)}
+            />
+          </IonItem>
+          <IonItem>
+            <IonLabel position="stacked">Password</IonLabel>
+            <IonInput
+              value={password}
+              type="password"
+              placeholder="Password"
+              onIonChange={(e) => setPassword(e.target.value)}
+            />
+          </IonItem>
+          <div className="ion-padding">
+            <IonButton type="submit" expand="block">
+              Sign up
+            </IonButton>
+          </div>
+        </form>
       </IonContent>
     </IonPage>
   );
