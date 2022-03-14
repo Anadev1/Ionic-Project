@@ -1,16 +1,21 @@
 import {
+  IonButton,
   IonContent,
   IonHeader,
+  IonImg,
+  IonInput,
+  IonItem,
+  IonList,
   IonPage,
   IonTitle,
   IonToolbar,
+  IonTextarea,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
 import "./DogProfileSetup.css";
 
 const DogProfileSetup = () => {
   return (
-    <IonPage>
+    <IonPage color="light">
       <IonHeader>
         <IonToolbar>
           <IonTitle>Dog Profile Setup</IonTitle>
@@ -22,7 +27,25 @@ const DogProfileSetup = () => {
             <IonTitle size="large">Dog Profile Setup</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Profile page" />
+        <IonImg src="assets/dog-photo-placeholder.png" className="dog-photo" />
+
+        <IonList>
+          <IonItem>
+            <IonInput type="text" placeholder="Name" />
+          </IonItem>
+          <IonItem>
+            <IonInput type="text" placeholder="Age" />
+          </IonItem>
+
+          <IonItem>
+            <IonTextarea
+              placeholder="Additional information"
+              className="additional-information-field"
+            ></IonTextarea>
+          </IonItem>
+        </IonList>
+
+        <IonButton>Add dog to profile</IonButton>
       </IonContent>
     </IonPage>
   );
