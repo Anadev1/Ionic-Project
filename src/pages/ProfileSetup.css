@@ -1,0 +1,20 @@
+.user-photo {
+  width: 150px !important;
+  margin: 50px auto !important;
+}
+
+.item-input {
+  margin-right: 25px !important;
+}
+
+.title-default {
+  text-align: left !important;
+  margin-top: 50px;
+  margin-left: 25px;
+  padding-inline: 0;
+}
+
+.button {
+  margin: 250px 25px 50px 25px !important;
+  width: 88%;
+}
