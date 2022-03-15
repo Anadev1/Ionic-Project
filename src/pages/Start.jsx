@@ -23,13 +23,18 @@ export default function Start() {
           <p className="start-text">Walking Paws. Happy Dogs.</p>
         </div>
 
-        <div className="ion-padding">
-          <IonButton expand="block" onClick={() => history.replace("/signup")}>
+        <div className="btn-container">
+          <IonButton
+            className="start-btn"
+            expand="block"
+            onClick={() => history.replace("/signup")}
+          >
             Sign up
           </IonButton>
         </div>
-        <div className="ion-padding">
+        <div className="btn-container">
           <IonButton
+            className="start-btn"
             expand="block"
             fill="outline"
             onClick={() => history.replace("/login")}

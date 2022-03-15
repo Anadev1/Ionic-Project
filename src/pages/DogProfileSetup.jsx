@@ -45,7 +45,7 @@ const DogProfileSetup = () => {
           </IonItem>
         </IonList>
 
-        <IonButton>Add dog to profile</IonButton>
+        <IonButton className="setup-btn">Add dog to profile</IonButton>
       </IonContent>
     </IonPage>
   );

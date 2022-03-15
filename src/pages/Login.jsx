@@ -4,12 +4,13 @@ import {
   IonHeader,
   IonPage,
   IonButton,
-  IonItem,
   IonInput,
   IonText,
+  IonIcon,
 } from "@ionic/react";
 import LoginImg from "../images/login.jpg";
 import "./Start.css";
+import { mailSharp, lockClosed } from "ionicons/icons";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -43,31 +44,33 @@ export default function Login() {
           <h2 className="start-headline">Login</h2>
         </div>
         <form onSubmit={handleSubmit}>
-          <IonItem>
-            <IonInput
-              value={mail}
-              type="email"
-              placeholder="Email"
-              onIonChange={(e) => setMail(e.target.value)}
-            />
-          </IonItem>
-          <IonItem>
-            <IonInput
-              value={password}
-              type="password"
-              placeholder="Password"
-              onIonChange={(e) => setPassword(e.target.value)}
-            />
-          </IonItem>
-          <div className="ion-padding">
-            <IonButton type="submit" expand="block">
+            <div className="form-container">
+              <IonIcon icon={mailSharp} />
+              <IonInput
+                value={mail}
+                type="email"
+                placeholder="Email"
+                onIonChange={(e) => setMail(e.target.value)}
+              />
+            </div>
+            <div className="form-container">
+              <IonIcon icon={lockClosed} />
+              <IonInput
+                value={password}
+                type="password"
+                placeholder="Password"
+                onIonChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          <div className="btn-container">
+            <IonButton className="start-btn" type="submit" expand="block">
               Log in
             </IonButton>
           </div>
-          <div className="login-container">
+          <div className="info-container">
             <p className="login-text">Don't have an account?</p>
             <IonText
-              class="login-button"
+              class="login-btn"
               onClick={() => history.replace("/signup")}
             >
               Sign up

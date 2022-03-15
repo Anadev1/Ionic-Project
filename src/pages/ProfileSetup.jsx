@@ -33,7 +33,7 @@ const ProfileSetup = () => {
 
         <IonList>
           <IonItem>
-            <IonInput type="text" placeholder="Adress" />
+            <IonInput type="text" placeholder="Address" />
           </IonItem>
           <IonItem>
             <IonInput type="text" placeholder="City" />
@@ -42,7 +42,7 @@ const ProfileSetup = () => {
 
         <IonTitle>My Dog(s)</IonTitle>
 
-        <IonButton>Done</IonButton>
+        <IonButton className="setup-btn">Done</IonButton>
       </IonContent>
     </IonPage>
   );

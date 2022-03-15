@@ -27,7 +27,7 @@
     padding: 1em 0;
 }
 
-.ios ion-button {
+.start-btn {
     width: 100%;
     height: 3em;
     font-family: Lato, sans-serif;
@@ -37,16 +37,30 @@
     margin: 0;
 }
 
-.ios ion-icon {
-  color: var(--ion-color-primary-text);
-}
-
 form {
     width: 100%;
     font-family: Lato, sans-serif;
 }
 
-.login-container {
+.native-input.sc-ion-input-ios {
+    padding: 1em;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0  2em 1em;
+    border-bottom: 1px solid var(--ion-color-primary-text);
+    color: var(--ion-color-primary-text);
+}
+
+.btn-container {
+    margin: 2em 2em 1em;
+
+}
+
+.info-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,7 +73,7 @@ form {
     font-family: Lato, sans-serif;
 }
 
-.login-button {
+.login-btn {
     font-weight: 600;
     font-size: 1.2em;
     font-family: Lato, sans-serif;
