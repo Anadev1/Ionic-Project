@@ -3,13 +3,15 @@ import {
   IonHeader,
   IonImg,
   IonPage,
+  IonButton
 } from "@ionic/react";
 import StartImg from "../images/start.jpg";
 import "./Start.css";
+import { useHistory } from "react-router-dom";
 
 
-
-const Start = () => {
+export default function Start() {
+  const history = useHistory();
   return (
     <IonPage>
       <IonHeader>
@@ -20,16 +22,6 @@ const Start = () => {
           <h2 className="start-headline">GoWalkies</h2>
           <p className="start-text">Walking Paws. Happy Dogs.</p>
 
-<<<<<<< HEAD
-        
-          <button href="/signup" className="signup-btn">
-            Sign up
-          </button>
-          <button href="/login" className="login-btn">
-            Login
-          </button>
-        
-=======
           <div className="ion-padding">
             <IonButton
               expand="block"
@@ -46,7 +38,7 @@ const Start = () => {
             >
               Log in
             </IonButton>
->>>>>>> parent of 9958288 (styling details)
+          </div>
         </div>
       </IonContent>
 
@@ -55,4 +47,3 @@ const Start = () => {
   );
 };
 
-export default Start;
