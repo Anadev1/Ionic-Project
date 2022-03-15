@@ -5,7 +5,7 @@ import {
   IonImg,
   IonInput,
   IonPage,
-  IonIcon
+  IonIcon,
 } from "@ionic/react";
 import SignupImg from "../images/signup.jpg";
 import "./Start.css";
@@ -29,10 +29,9 @@ export default function Signup() {
       .catch((error) => {
         console.log(error);
       });
-    
   }
   return (
-    <IonPage>
+    <IonPage color="light">
       <IonHeader>
         <IonImg className="post-img" src={SignupImg} />
       </IonHeader>
@@ -41,30 +40,27 @@ export default function Signup() {
           <h2 className="start-headline">Sign up</h2>
         </div>
         <form onSubmit={handleSubmit}>
-            <div className="form-container">
-              <IonIcon icon={mailSharp} />
-              <IonInput
-                value={mail}
-                type="email"
-                placeholder="Email"
-                onIonChange={(e) => setMail(e.target.value)}
-              />
-           </div>
           <div className="form-container">
-              <IonIcon icon={lockClosed} />
-              <IonInput
-                value={password}
-                type="password"
-                placeholder="Password"
-                onIonChange={(e) => setPassword(e.target.value)}
-              />
+            <IonIcon icon={mailSharp} />
+            <IonInput
+              value={mail}
+              type="email"
+              placeholder="Email"
+              onIonChange={(e) => setMail(e.target.value)}
+            />
           </div>
-  
+          <div className="form-container">
+            <IonIcon icon={lockClosed} />
+            <IonInput
+              value={password}
+              type="password"
+              placeholder="Password"
+              onIonChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
           <div className="btn-container">
-            <IonButton
-              className="start-btn"
-              type="submit"
-              expand="block">
+            <IonButton className="start-btn" type="submit" expand="block">
               Sign up
             </IonButton>
           </div>

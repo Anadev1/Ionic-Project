@@ -1,0 +1,15 @@
+.user-info-section {
+  display: flex;
+  justify-content: center;
+}
+
+.user-info-text {
+  margin-left: 2rem;
+}
+
+.divider {
+  height: 5px !important;
+  width: 100vw !important;
+  margin: 50px 25px !important;
+  background: orange !important;
+}
