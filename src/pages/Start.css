@@ -24,7 +24,11 @@
     font-weight: 200;
     color: var( --ion-color-primary-text);
     margin: 0;
+<<<<<<< HEAD
     padding: 1em 0;
+=======
+    padding: 1em 0 4em;
+>>>>>>> parent of ac81850 (styling)
 }
 
 .ios ion-button {

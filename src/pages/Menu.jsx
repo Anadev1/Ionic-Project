@@ -5,6 +5,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import ExploreContainer from "../components/ExploreContainer";
 
 const Menu = () => {
   return (
@@ -20,6 +21,7 @@ const Menu = () => {
             <IonTitle size="large"></IonTitle>
           </IonToolbar>
         </IonHeader>
+        <ExploreContainer name="Menu page" />
       </IonContent>
     </IonPage>
   );

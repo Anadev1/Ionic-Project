@@ -5,11 +5,10 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { walksRef, usersRef } from "../firebase-config";
+import { postsRef, usersRef } from "../firebase-config";
 import { onValue, get } from "firebase/database";
 
-export default function Walks() {
-
+const Walks = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -23,9 +22,9 @@ export default function Walks() {
             <IonTitle size="large"></IonTitle>
           </IonToolbar>
         </IonHeader>
-    
       </IonContent>
     </IonPage>
   );
 };
 
+export default Walks;

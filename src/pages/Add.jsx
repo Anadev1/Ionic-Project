@@ -1,4 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import ExploreContainer from '../components/ExploreContainer';
 import './Add.css';
 
 const Add = () => {
@@ -15,6 +16,7 @@ const Add = () => {
             <IonTitle size="large">Add</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <ExploreContainer name="Add page" />
       </IonContent>
     </IonPage>
   );
