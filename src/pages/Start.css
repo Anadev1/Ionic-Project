@@ -1,0 +1,66 @@
+.post-image {
+    width: 100%;
+}
+
+.start-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4em 2em 3em;
+    background-color: var(--ion-color-primary-background);
+    z-index: 1000;
+}
+
+.start-headline {
+    font-family: PermanentMarker, sans-serif;
+    font-size: 2.5em;
+    color: var( --ion-color-primary-text);
+    margin: 0;
+}
+
+.start-text {
+    font-family: Lato, sans-serif;
+    font-size: 1.25em;
+    font-weight: 200;
+    color: var( --ion-color-primary-text);
+    margin: 0;
+    padding: 1em 0;
+}
+
+.ios ion-button {
+    width: 100%;
+    height: 3em;
+    font-family: Lato, sans-serif;
+    font-size: 1.4em;
+    font-weight: 200;
+    border-radius: 10px;
+    margin: 0;
+}
+
+.ios ion-icon {
+  color: var(--ion-color-primary-text);
+}
+
+form {
+    width: 100%;
+    font-family: Lato, sans-serif;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-text {
+    padding-right: 0.25em;
+    font-weight: 200;
+    font-size: 1.2em;
+    font-family: Lato, sans-serif;
+}
+
+.login-button {
+    font-weight: 600;
+    font-size: 1.2em;
+    font-family: Lato, sans-serif;
+}

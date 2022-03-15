@@ -5,7 +5,8 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import ExploreContainer from "../components/ExploreContainer";
+import { postsRef, usersRef } from "../firebase-config";
+import { onValue, get } from "firebase/database";
 
 const Walks = () => {
   return (
@@ -21,7 +22,6 @@ const Walks = () => {
             <IonTitle size="large"></IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Walks page" />
       </IonContent>
     </IonPage>
   );

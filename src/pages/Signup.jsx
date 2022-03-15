@@ -1,0 +1,71 @@
+import {
+  IonButton,
+  IonContent,
+  IonHeader,
+  IonImg,
+  IonInput,
+  IonItem,
+  IonPage,
+} from "@ionic/react";
+import SignupImg from "../images/signup.jpg";
+import "./Start.css";
+import { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+export default function Signup() {
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
+  const auth = getAuth();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    createUserWithEmailAndPassword(auth, mail, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonImg className="post-img" src={SignupImg} />
+      </IonHeader>
+      <IonContent fullscreen>
+        <div className="start-container">
+          <h2 className="start-headline">Sign up</h2>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="ion-padding">
+            <IonItem>
+              {/* <ion-icon name="mail"></ion-icon> */}
+              <IonInput
+                value={mail}
+                type="email"
+                placeholder="Email"
+                onIonChange={(e) => setMail(e.target.value)}
+              />
+            </IonItem>
+            <IonItem>
+              {/* <ion-icon name="lock-closed"></ion-icon> */}
+              <IonInput
+                value={password}
+                type="password"
+                placeholder="Password"
+                onIonChange={(e) => setPassword(e.target.value)}
+              />
+            </IonItem>
+          </div>
+          <div className="ion-padding">
+            <IonButton type="submit" expand="block">
+              Sign up
+            </IonButton>
+          </div>
+        </form>
+      </IonContent>
+    </IonPage>
+  );
+}
