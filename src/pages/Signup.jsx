@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonHeader, IonImg, IonInput, IonItem, IonPage } from "@ionic/react";
+import { IonButton, IonContent, IonHeader, IonImg, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
 import SignupImg from "../images/signup.jpg";
 import "./Start.css";
 import { useState } from "react";
@@ -58,9 +58,8 @@ export default function Signup() {
         </div>
 <<<<<<< HEAD
         <form onSubmit={handleSubmit}>
-          <div className="ion-padding">
           <IonItem>
-            {/* <ion-icon name="mail"></ion-icon> */}
+            <IonLabel position="stacked">Email</IonLabel>
             <IonInput
               value={mail}
               type="email"
@@ -69,15 +68,14 @@ export default function Signup() {
             />
           </IonItem>
           <IonItem>
-            {/* <ion-icon name="lock-closed"></ion-icon> */}
+            <IonLabel position="stacked">Password</IonLabel>
             <IonInput
               value={password}
               type="password"
               placeholder="Password"
               onIonChange={(e) => setPassword(e.target.value)}
             />
-            </IonItem>
-          </div>
+          </IonItem>
           <div className="ion-padding">
             <IonButton type="submit" expand="block">
               Sign up
