@@ -26,6 +26,7 @@ export const auth = initializeAuth(app, {
 const database = getDatabase(app);
 export const walksRef = ref(database, "walks");
 
+
 export const usersRef = ref(database, "users");
 // Get reference to specific post using post id
 export function getPostRef(postId) {

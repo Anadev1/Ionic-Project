@@ -1,4 +1,12 @@
-import { IonButton, IonContent, IonHeader, IonImg, IonInput, IonItem, IonLabel, IonPage } from "@ionic/react";
+import {
+  IonButton,
+  IonContent,
+  IonHeader,
+  IonImg,
+  IonInput,
+  IonItem,
+  IonPage,
+} from "@ionic/react";
 import SignupImg from "../images/signup.jpg";
 import "./Start.css";
 import { useState } from "react";
@@ -12,12 +20,12 @@ export default function Signup() {
   function handleSubmit(event) {
     event.preventDefault();
     createUserWithEmailAndPassword(auth, mail, password)
-      .then(userCredential => {
+      .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -26,66 +34,38 @@ export default function Signup() {
       <IonHeader>
         <IonImg className="post-img" src={SignupImg} />
       </IonHeader>
-      <IonContent>
+      <IonContent fullscreen>
         <div className="start-container">
           <h2 className="start-headline">Sign up</h2>
-          <form onSubmit={handleSubmit}>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="ion-padding">
             <IonItem>
-              <IonLabel position="stacked">Email</IonLabel>
+              {/* <ion-icon name="mail"></ion-icon> */}
               <IonInput
                 value={mail}
                 type="email"
                 placeholder="Email"
-                onIonChange={e => setMail(e.target.value)}
+                onIonChange={(e) => setMail(e.target.value)}
               />
             </IonItem>
             <IonItem>
-              <IonLabel position="stacked">Password</IonLabel>
+              {/* <ion-icon name="lock-closed"></ion-icon> */}
               <IonInput
                 value={password}
                 type="password"
                 placeholder="Password"
-                onIonChange={e => setPassword(e.target.value)}
+                onIonChange={(e) => setPassword(e.target.value)}
               />
             </IonItem>
-            <div className="ion-padding">
-              <IonButton type="submit" expand="block">
-                Sign up
-              </IonButton>
-            </div>
-  
-          </form>
-        </div>
-<<<<<<< HEAD
-        <form onSubmit={handleSubmit}>
-          <IonItem>
-            <IonLabel position="stacked">Email</IonLabel>
-            <IonInput
-              value={mail}
-              type="email"
-              placeholder="Email"
-              onIonChange={(e) => setMail(e.target.value)}
-            />
-          </IonItem>
-          <IonItem>
-            <IonLabel position="stacked">Password</IonLabel>
-            <IonInput
-              value={password}
-              type="password"
-              placeholder="Password"
-              onIonChange={(e) => setPassword(e.target.value)}
-            />
-          </IonItem>
+          </div>
           <div className="ion-padding">
             <IonButton type="submit" expand="block">
               Sign up
             </IonButton>
           </div>
         </form>
-=======
->>>>>>> parent of ac81850 (styling)
       </IonContent>
     </IonPage>
   );
-};
-
+}
