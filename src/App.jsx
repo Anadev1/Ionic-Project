@@ -38,6 +38,8 @@ import Start from "./pages/Start";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import ProfileSetup from "./pages/ProfileSetup";
+import DogProfileSetup from "./pages/DogProfileSetup";
 import { useEffect, useState } from "react";
 
 setupIonicReact();
@@ -61,7 +63,6 @@ function PrivateRoutes() {
         <Route exact path="/menu">
           <Menu />
         </Route>
-          
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         <IonTabButton tab="home" href="/home">
@@ -79,9 +80,14 @@ function PrivateRoutes() {
         <IonTabButton tab="menu" href="/menu">
           <IonIcon icon={menu} />
         </IonTabButton>
+        <Route exact path="/usersetup">
+          <ProfileSetup />
+        </Route>
+        <Route exact path="/dogsetup">
+          <DogProfileSetup />
+        </Route>
       </IonTabBar>
     </IonTabs>
-
   );
 }
 
