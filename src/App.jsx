@@ -15,6 +15,8 @@ import Walks from "./pages/Walks";
 import Add from './pages/Add';
 import Menu from "./pages/Menu";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Next from './pages/Next';
+import Splash from './pages/Splash';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -60,8 +62,14 @@ function PrivateRoutes() {
         <Route exact path="/add">
           <Add />
         </Route>
+        <Route exact path="/splash">
+            <Splash/>
+          </Route>
         <Route exact path="/profile">
           <Profile />
+        </Route>
+        <Route path="/next">
+            <Next/>
         </Route>
         <Route exact path="/menu">
           <Menu />
