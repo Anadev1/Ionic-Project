@@ -1,17 +1,11 @@
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonImg,
-  IonIcon
-} from "@ionic/react";
-import OnboardingImg from "../images/onboarding-1.jpg";
+import { IonContent, IonHeader, IonPage, IonImg, IonIcon } from "@ionic/react";
+import OnboardingImg from "../images/onboarding-2.jpg";
 import { arrowForwardCircle } from "ionicons/icons";
 import "./Start.css";
 import { useHistory } from "react-router-dom";
 
-export default function Onboarding1() {
-      const history = useHistory();
+export default function Onboarding2() {
+  const history = useHistory();
   return (
     <IonPage>
       <IonHeader>
@@ -20,24 +14,24 @@ export default function Onboarding1() {
       <IonContent fullscreen>
         <div className="start-container">
           <h2 className="start-headline-alt">
-            Create a profile for you and your furry friend
+            Add your walkies & find a walker in your area
           </h2>
         </div>
 
         <div className="text-container">
           <p className="onboarding-text">
-            To use GoWalkies you need a profile for both you and your dog(s)
-            and simply fill in some information.
+            Once you are signed up, you simply add your walk to the app and
+            we will find you a walker.
           </p>
         </div>
 
         <div className="btn-container-alt">
           <div>
-            <span className="dot-selected"></span>
             <span
               className="dot"
-              onClick={() => history.replace("/onboarding2")}
+              onClick={() => history.replace("/onboarding1")}
             ></span>
+            <span className="dot-selected"></span>
             <span
               className="dot"
               onClick={() => history.replace("/onboarding3")}
@@ -47,7 +41,7 @@ export default function Onboarding1() {
           <IonIcon
             className="onboarding-btn"
             icon={arrowForwardCircle}
-            onClick={() => history.replace("/onboarding2")}
+            onClick={() => history.replace("/onboarding3")}
           />
         </div>
       </IonContent>
