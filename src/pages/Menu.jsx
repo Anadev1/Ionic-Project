@@ -5,11 +5,13 @@ import {
   IonTitle,
   IonToolbar,
   IonButton,
+ 
 } from "@ionic/react";
 import { useState, useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getUserRef } from "../firebase-config";
 import { get } from "@firebase/database";
+
 
 
 export default function Menu() {
@@ -41,9 +43,7 @@ function handleSignOut() {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          
-        </IonToolbar>
+        <IonToolbar></IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
@@ -51,7 +51,12 @@ function handleSignOut() {
             <IonTitle size="large"></IonTitle>
           </IonToolbar>
         </IonHeader>
+
+  
+
         <IonButton onClick={handleSignOut}>Log Out</IonButton>
+
+        
       </IonContent>
     </IonPage>
   );
