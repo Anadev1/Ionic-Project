@@ -41,7 +41,7 @@ export default function Onboarding3() {
           <IonIcon
             className="onboarding-btn"
             icon={arrowForwardCircle}
-            onClick={() => history.replace("/usersetup")}
+            onClick={() => history.replace("/home")}
           />
         </div>
       </IonContent>

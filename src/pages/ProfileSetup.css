@@ -18,3 +18,15 @@
   margin: 250px 25px 50px 25px !important;
   width: 88%;
 }
+
+.dog-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2em 2em
+}
+
+.add-btn {
+  height: 100px;
+  width: 100px;
+  color: var(--ion-color-primary);
+}
