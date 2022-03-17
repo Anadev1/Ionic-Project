@@ -1,6 +1,8 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonText } from '@ionic/react';
 import './Home.css';
 import { useHistory } from "react-router-dom";
+import { postsRef, usersRef } from "../firebase-config";
+import { onValue, get } from "firebase/database";
 
 export default function Home() {
     const history = useHistory();

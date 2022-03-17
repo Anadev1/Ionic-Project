@@ -9,11 +9,9 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { home, paw, add, person, menu } from "ionicons/icons";
+import { home, add, person } from "ionicons/icons";
 import Home from "./pages/Home";
-import Walks from "./pages/Walks";
 import Add from "./pages/Add";
-import Menu from "./pages/Menu";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Next from './pages/Next';
 import Splash from './pages/Splash';
@@ -56,9 +54,6 @@ function PrivateRoutes() {
         <Route exact path="/home">
           <Home />
         </Route>
-        <Route exact path="/walks">
-          <Walks />
-        </Route>
         <Route exact path="/add">
           <Add />
         </Route>
@@ -70,9 +65,6 @@ function PrivateRoutes() {
         </Route>
         <Route path="/next">
             <Next/>
-        </Route>
-        <Route exact path="/menu">
-          <Menu />
         </Route>
         <Route exact path="/usersetup">
           <ProfileSetup />
@@ -95,17 +87,11 @@ function PrivateRoutes() {
         <IonTabButton tab="home" href="/home">
           <IonIcon icon={home} />
         </IonTabButton>
-        <IonTabButton tab="walks" href="/walks">
-          <IonIcon icon={paw} />
-        </IonTabButton>
         <IonTabButton tab="add" href="/add">
           <IonIcon icon={add} />
         </IonTabButton>
         <IonTabButton tab="profile" href="/profile">
           <IonIcon icon={person} />
-        </IonTabButton>
-        <IonTabButton tab="menu" href="/menu">
-          <IonIcon icon={menu} />
         </IonTabButton>
       </IonTabBar>
     </IonTabs>
