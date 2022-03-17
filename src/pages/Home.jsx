@@ -1,8 +1,10 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonText } from '@ionic/react';
 import './Home.css';
+import { useHistory } from "react-router-dom";
 
-const Home = () => {
+export default function Home() {
+    const history = useHistory();
+
   return (
     <IonPage>
       <IonHeader>
@@ -16,10 +18,30 @@ const Home = () => {
             <IonTitle size="large">Home</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Home page" />
+        <div>
+          <IonText
+            class="login-btn"
+            onClick={() => history.replace("/usersetup")}
+          >
+            User set up
+          </IonText>
+          <br></br>
+          <IonText
+            class="login-btn"
+            onClick={() => history.replace("/dogsetup")}
+          >
+            Dog set up
+          </IonText>
+          <br></br>
+          <IonText
+            class="login-btn"
+            onClick={() => history.replace("/onboarding1")}
+          >
+            Onboarding
+          </IonText>
+        </div>
+
       </IonContent>
     </IonPage>
   );
 };
-
-export default Home;
