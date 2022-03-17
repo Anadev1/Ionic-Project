@@ -14,7 +14,6 @@ const firebaseConfig = {
   appId: "1:625565914471:web:327417c63f7849fbfc8bc2",
 };
 
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -25,7 +24,6 @@ export const auth = initializeAuth(app, {
 
 const database = getDatabase(app);
 export const walksRef = ref(database, "walks");
-
 
 export const usersRef = ref(database, "users");
 // Get reference to specific post using post id

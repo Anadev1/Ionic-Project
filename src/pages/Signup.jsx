@@ -6,7 +6,7 @@ import {
   IonInput,
   IonPage,
   IonIcon,
-  IonText
+  IonText,
 } from "@ionic/react";
 import SignupImg from "../images/signup.jpg";
 import "./Start.css";
@@ -32,10 +32,9 @@ export default function Signup() {
       .catch((error) => {
         console.log(error);
       });
-    
   }
   return (
-    <IonPage>
+    <IonPage color="light">
       <IonHeader>
         <IonImg className="post-img" src={SignupImg} />
       </IonHeader>
