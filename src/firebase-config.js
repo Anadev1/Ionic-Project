@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-
 import { getDatabase, ref } from "firebase/database";
+import { getStorage } from "firebase/storage";
 import { initializeAuth, indexedDBLocalPersistence } from "firebase/auth";
 
 // Your web app's Firebase configuration
@@ -14,7 +14,6 @@ const firebaseConfig = {
   appId: "1:625565914471:web:327417c63f7849fbfc8bc2",
 };
 
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -26,7 +25,6 @@ export const auth = initializeAuth(app, {
 const database = getDatabase(app);
 export const walksRef = ref(database, "walks");
 
-
 export const usersRef = ref(database, "users");
 // Get reference to specific post using post id
 export function getPostRef(postId) {
@@ -37,3 +35,5 @@ export function getUserRef(userId) {
   return ref(database, "users/" + userId);
 }
 
+// Reference to the storage service
+export const storage = getStorage(app);
