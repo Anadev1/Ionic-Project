@@ -22,7 +22,7 @@
 .dog-container {
   display: flex;
   flex-direction: column;
-  padding: 2em 2em
+  margin: 2em 2em
 }
 
 .add-btn {
