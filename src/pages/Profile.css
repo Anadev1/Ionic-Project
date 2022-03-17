@@ -1,0 +1,15 @@
+.user-info-section {
+  display: flex;
+  justify-content: center;
+}
+
+.user-info-text {
+  margin-left: 2rem;
+}
+
+.user-container {
+  border-bottom: 3px solid orange;
+  box-shadow: none;
+  border-radius: 0;
+  padding-bottom: 2rem;
+}

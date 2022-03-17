@@ -35,7 +35,7 @@ export default function Login() {
   }
 
   return (
-    <IonPage>
+    <IonPage color="light">
       <IonHeader>
         <IonImg className="post-img" src={LoginImg} />
       </IonHeader>
@@ -44,24 +44,24 @@ export default function Login() {
           <h2 className="start-headline">Login</h2>
         </div>
         <form onSubmit={handleSubmit}>
-            <div className="form-container">
-              <IonIcon icon={mailSharp} />
-              <IonInput
-                value={mail}
-                type="email"
-                placeholder="Email"
-                onIonChange={(e) => setMail(e.target.value)}
-              />
-            </div>
-            <div className="form-container">
-              <IonIcon icon={lockClosed} />
-              <IonInput
-                value={password}
-                type="password"
-                placeholder="Password"
-                onIonChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+          <div className="form-container">
+            <IonIcon icon={mailSharp} />
+            <IonInput
+              value={mail}
+              type="email"
+              placeholder="Email"
+              onIonChange={(e) => setMail(e.target.value)}
+            />
+          </div>
+          <div className="form-container">
+            <IonIcon icon={lockClosed} />
+            <IonInput
+              value={password}
+              type="password"
+              placeholder="Password"
+              onIonChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
           <div className="btn-container">
             <IonButton className="start-btn" type="submit" expand="block">
               Log in
