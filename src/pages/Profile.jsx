@@ -6,10 +6,14 @@ import {
   IonHeader,
   IonImg,
   IonPage,
+  IonIcon,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import "./Profile.css";
+import { addCircleOutline } from "ionicons/icons";
+import userExamplePhoto from "../images/user-example-photo.png";
+import dogExamplePhoto from "../images/dog-example-photo.png";
 
 const Profile = () => {
   return (
@@ -28,7 +32,11 @@ const Profile = () => {
         <IonCard className="user-container">
           <IonCardContent className="user-info-section">
             <div className="user-image-container">
-              <IonImg src="" />
+              <IonImg
+                src={userExamplePhoto}
+                className="user-profile-photo"
+                alt="user"
+              />
               <p>Edit</p>
             </div>
 
@@ -38,18 +46,26 @@ const Profile = () => {
             </div>
           </IonCardContent>
         </IonCard>
-        <IonCard className="dogs-container">
-          <IonCardContent className="dogs-info-section">
-            <div className="dog-image-container">
-              <IonImg src="" />
-            </div>
-
-            <div className="user-info-text">
-              <IonCardSubtitle>Jens Frederiken</IonCardSubtitle>
-              <p>Tordenskjoldgade 2, 3.7, Aarhus C</p>
-            </div>
-          </IonCardContent>
-        </IonCard>
+        <h2 className="dogs-container-title">My Dog(s)</h2>
+        <ul className="dogs-container">
+          <li className="dog-container">
+            <IonImg
+              src={dogExamplePhoto}
+              className="dog-profile-photo"
+              alt="dog"
+            />
+            <p className="dog-name">Amazing</p>
+          </li>
+          <li className="dog-container">
+            <IonImg
+              src={dogExamplePhoto}
+              className="dog-profile-photo"
+              alt="dog"
+            />
+            <p className="dog-name">Amazing</p>
+          </li>
+          <IonIcon icon={addCircleOutline} className="add-icon" />
+        </ul>
       </IonContent>
     </IonPage>
   );
