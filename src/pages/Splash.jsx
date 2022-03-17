@@ -19,7 +19,7 @@ const Splash = () => {
             <IonContent fullscreen>
                 <IonHeader collapse="condense">
                     <IonToolbar>
-                        <IonTitle size="large">Splash</IonTitle>
+                        <IonTitle size="large">ADD WALK</IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <IonImg class="img" src={img1} />

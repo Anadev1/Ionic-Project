@@ -20,7 +20,7 @@ const Add = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle><p align="center">ADD WALK</p></IonTitle>
+          <IonTitle><p align="center" class="test">ADD WALK</p></IonTitle>
           <IonButtons slot="start">
               <IonBackButton defaultHref="home"/>
           </IonButtons>
