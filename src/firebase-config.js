@@ -26,9 +26,9 @@ const database = getDatabase(app);
 export const walksRef = ref(database, "walks");
 
 export const usersRef = ref(database, "users");
-// Get reference to specific post using post id
-export function getPostRef(postId) {
-  return ref(database, "walks/" + postId);
+// Get reference to specific walk using walk id
+export function getWalkRef(walkId) {
+  return ref(database, "walks/" + walkId);
 }
 // Get reference to specific user using user id
 export function getUserRef(userId) {

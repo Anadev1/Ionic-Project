@@ -1,7 +1,13 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonButtons,IonBackButton, IonLabel } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonToolbar, IonButtons,IonBackButton, IonLabel, IonRow, IonGrid, IonCol, IonAvatar } from '@ionic/react';
 import './Add.css';
 import dog1 from './assets/dog1.jpg';
 import dog2 from './assets/dog2.jpg';
+import { useHistory } from "react-router-dom";
+import { getAuth } from "firebase/auth";
+import { walksRef } from "../firebase-config";
+import { push, set } from "firebase/database";
+import WalksForm from '../components/WalksForm';
+
 const imageClickDog1 = () => {
   var element1 = document.getElementById("dog1");
   var element2 = document.getElementById("dog2");
@@ -14,97 +20,71 @@ const imageClickDog2 = () => {
   element2.style.fontFamily="bold";
   element1.style.fontFamily="sans-serif"
 }
-const Add = () => {
+
+
+export default function Add() {
+  const history = useHistory();
+  const auth = getAuth();
+
+  async function handleSubmit(newWalk) {
+    newWalk.uid = auth.currentUser.uid;
+    const newWalkRef = push(walksRef);
+    const newWalkKey = newWalkRef.key;
+    console.log(newWalkKey);
+    /* const imageUrl = await uploadImage(newUser.image, newUserKey); 
+    newUser.image = imageUrl; */
+    set(newWalkRef, newWalk)
+      .then(() => {
+        history.replace("/home");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>
-            <p align="center" class="test">
-              ADD WALK
-            </p>
-          </IonTitle>
+        <IonToolbar className="topbar">
           <IonButtons slot="start">
-            <IonBackButton defaultHref="home" />
+            <IonBackButton text="" defaultHref="home" />
           </IonButtons>
+          <h1 className="topbar-title">Add walk</h1>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Add</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ion-text color="dark">
-          <div class="ion-padding-start ion-padding-top">
-            <p>Pick a dog to GoWalkies</p>
-          </div>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="3">
-                <ion-avatar>
+        <div className="add-dog-container">
+          <p>Pick a dog to GoWalkies</p>
+          <IonGrid>
+            <IonRow>
+              <IonCol size="3">
+                <IonAvatar>
                   <img src={dog1} alt="dog" onClick={imageClickDog1} />
-                </ion-avatar>
-              </ion-col>
-              <ion-col size="3">
-                <ion-avatar>
+                </IonAvatar>
+              </IonCol>
+              <IonCol size="3">
+                <IonAvatar>
                   <img src={dog2} alt="dog" onClick={imageClickDog2} />
-                </ion-avatar>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="3">
-                <IonLabel id="dog1" color="warning" class="label">
+                </IonAvatar>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol size="3">
+                <IonLabel id="dog1" color="warning" className="label">
                   Laica
                 </IonLabel>
-              </ion-col>
-              <ion-col size="3">
-                <IonLabel id="dog2" color="warning" class="label">
+              </IonCol>
+              <IonCol size="3">
+                <IonLabel id="dog2" color="warning" className="label">
                   Milo
                 </IonLabel>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          <div class="ion-padding-start">
-            <p>
-              GoWalkies description(Here you specify date,pick up time,
-              additional information about the dog etc.)
-            </p>
-          </div>
-        </ion-text>
-        <div class="ion-padding-top">
-          <ion-item>
-            <ion-label position="floating" color="warning">
-              Pick up adress
-            </ion-label>
-            <ion-input></ion-input>
-          </ion-item>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
         </div>
-        <br></br>
-        <div class="ion-padding-top">
-          <ion-item>
-            <ion-label position="floating" color="warning">
-              Breed
-            </ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-        </div>
-        <br></br>
-        <div class="ion-padding-top">
-          <ion-item>
-            <ion-label position="floating" color="warning">
-              Additional information
-            </ion-label>
-            <ion-input></ion-input>
-          </ion-item>
-        </div>
-        <div class="ion-padding-top">
-          <ion-button href="/next" expand="block" color="warning">
-            Next
-          </ion-button>
-        </div>
+
+        <WalksForm handleSubmit={handleSubmit} />
       </IonContent>
     </IonPage>
   );
 };
-export default Add;
