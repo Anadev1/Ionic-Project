@@ -51,7 +51,7 @@ export default function WalksForm({ walk, handleSubmit }) {
     return (
       <form onSubmit={submitEvent}>
         <IonList>
-          <div className="form-container">
+      
             <IonItem>
               <IonInput
                 value={time}
@@ -76,7 +76,7 @@ export default function WalksForm({ walk, handleSubmit }) {
                 required
               />
             </IonItem>
-          </div>
+
 
           {/* <IonItem onClick={takePicture} lines="none">
           <IonLabel>Choose Image</IonLabel>
