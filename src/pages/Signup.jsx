@@ -70,7 +70,7 @@ export default function Signup() {
           <div className="info-container">
             <p className="login-text">Already have an account?</p>
             <IonText
-              class="login-btn"
+              class="login-signup-btn"
               onClick={() => history.replace("/login")}
             >
               Log in

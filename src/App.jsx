@@ -41,6 +41,8 @@ import Profile from "./pages/Profile";
 import ProfileSetup from "./pages/ProfileSetup";
 import DogProfileSetup from "./pages/DogProfileSetup";
 import Onboarding1 from "./pages/Onboarding1";
+import Onboarding2 from "./pages/Onboarding2";
+import Onboarding3 from "./pages/Onboarding3";
 import { useEffect, useState } from "react";
 
 setupIonicReact();
@@ -70,8 +72,14 @@ function PrivateRoutes() {
         <Route exact path="/dogsetup">
           <DogProfileSetup />
         </Route>
-        <Route exact path="onboarding1">
+        <Route exact path="/onboarding1">
           <Onboarding1 />
+        </Route>
+        <Route exact path="/onboarding2">
+          <Onboarding2 />
+        </Route>
+        <Route exact path="/onboarding3">
+          <Onboarding3 />
         </Route>
       </IonRouterOutlet>
 
