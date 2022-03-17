@@ -26,14 +26,16 @@ const database = getDatabase(app);
 export const walksRef = ref(database, "walks");
 
 export const usersRef = ref(database, "users");
-// Get reference to specific walk using walk id
+
+export const dogsRef = ref(database, "dogs");
+// Get reference to specific post using post id
 export function getWalkRef(walkId) {
   return ref(database, "walks/" + walkId);
 }
 // Get reference to specific user using user id
-export function getUserRef(userId) {
-  return ref(database, "users/" + userId);
-}
 
+export function getUserRef(dogId) {
+  return ref(database, "dogprofile/" + dogId);
+}
 // Reference to the storage service
 export const storage = getStorage(app);

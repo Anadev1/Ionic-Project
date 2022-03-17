@@ -1,19 +1,34 @@
 import {
-  IonButton,
   IonContent,
   IonHeader,
-  IonImg,
-  IonInput,
-  IonItem,
-  IonList,
   IonPage,
   IonTitle,
   IonToolbar,
-  IonTextarea,
 } from "@ionic/react";
 import "./DogProfileSetup.css";
+import { useHistory } from "react-router-dom";
+import { dogsRef } from "../firebase-config";
+import { push, set } from "firebase/database";
+import DogForm from "../components/DogForm";
 
-const DogProfileSetup = () => {
+export default function DogProfileSetup() {
+  const history = useHistory();
+
+  async function handleSubmit(newDog) {
+    const newDogRef = push(dogsRef);
+    const newDogKey = newDogRef.key;
+    console.log(newDogKey);
+    /* const imageUrl = await uploadImage(newUser.image, newUserKey); 
+    newUser.image = imageUrl; */
+    set(newDogRef, newDog)
+      .then(() => {
+        history.replace("/profile");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <IonPage color="light">
       <IonHeader>
@@ -27,28 +42,9 @@ const DogProfileSetup = () => {
             <IonTitle size="large">Dog Profile Setup</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonImg src="assets/dog-photo-placeholder.png" className="dog-photo" />
 
-        <IonList>
-          <IonItem>
-            <IonInput type="text" placeholder="Name" />
-          </IonItem>
-          <IonItem>
-            <IonInput type="text" placeholder="Age" />
-          </IonItem>
-
-          <IonItem>
-            <IonTextarea
-              placeholder="Additional information"
-              className="additional-information-field"
-            ></IonTextarea>
-          </IonItem>
-        </IonList>
-
-        <IonButton className="setup-btn">Add dog to profile</IonButton>
+        <DogForm handleSubmit={handleSubmit} />
       </IonContent>
     </IonPage>
   );
-};
-
-export default DogProfileSetup;
+}
