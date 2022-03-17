@@ -39,8 +39,18 @@ export default function Home() {
           >
             Onboarding
           </IonText>
+          <br></br>
+          <IonText class="login-btn" onClick={() => history.replace("/next")}>
+            Next
+          </IonText>
+          <br></br>
+          <IonText
+            class="login-btn"
+            onClick={() => history.replace("/splash")}
+          >
+            Splash
+          </IonText>
         </div>
-
       </IonContent>
     </IonPage>
   );
