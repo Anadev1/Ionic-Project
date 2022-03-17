@@ -1,11 +1,18 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonText } from '@ionic/react';
-import './Home.css';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonText,
+} from "@ionic/react";
+import "./Home.css";
 import { useHistory } from "react-router-dom";
 import { postsRef, usersRef } from "../firebase-config";
 import { onValue, get } from "firebase/database";
 
 export default function Home() {
-    const history = useHistory();
+  const history = useHistory();
 
   return (
     <IonPage>
@@ -46,14 +53,11 @@ export default function Home() {
             Next
           </IonText>
           <br></br>
-          <IonText
-            class="login-btn"
-            onClick={() => history.replace("/splash")}
-          >
+          <IonText class="login-btn" onClick={() => history.replace("/splash")}>
             Splash
           </IonText>
         </div>
       </IonContent>
     </IonPage>
   );
-};
+}
