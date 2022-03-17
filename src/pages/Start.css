@@ -1,3 +1,5 @@
+/***** Styling for start, login, signup and onboarding *****/
+
 .post-image {
     width: 100%;
 }
@@ -18,8 +20,34 @@
     margin: 0;
 }
 
+/* Alternative headline styling */ 
+.start-headline-alt {
+    font-family: Open Sans Condensed, sans-serif;
+    font-size: 1.75em;
+    font-weight: 700;
+    color: var( --ion-color-primary-text);
+    margin: 0;
+}
+
+.start-btn {
+    width: 100%;
+    height: 3em;
+    font-family: Open Sans, sans-serif;
+    font-size: 1.4em;
+    font-weight: 200;
+    border-radius: 10px;
+    margin: 0;
+}
+
+.btn-container {
+    margin: 2em 2em 1em;
+
+}
+
+/***** Styling for start page only *****/
+
 .start-text {
-    font-family: Lato, sans-serif;
+    font-family: Open Sans, sans-serif;
     font-size: 1.25em;
     font-weight: 200;
     color: var( --ion-color-primary-text);
@@ -27,19 +55,11 @@
     padding: 1em 0;
 }
 
-.start-btn {
-    width: 100%;
-    height: 3em;
-    font-family: Lato, sans-serif;
-    font-size: 1.4em;
-    font-weight: 200;
-    border-radius: 10px;
-    margin: 0;
-}
+/***** Styling for login and sign up only *****/
 
 form {
     width: 100%;
-    font-family: Lato, sans-serif;
+    font-family: Open Sans, sans-serif;
 }
 
 .native-input.sc-ion-input-ios {
@@ -55,11 +75,6 @@ form {
     color: var(--ion-color-primary-text);
 }
 
-.btn-container {
-    margin: 2em 2em 1em;
-
-}
-
 .info-container {
     display: flex;
     justify-content: center;
@@ -70,11 +85,55 @@ form {
     padding-right: 0.25em;
     font-weight: 200;
     font-size: 1.2em;
-    font-family: Lato, sans-serif;
+    font-family: Open Sans, sans-serif;
 }
 
-.login-btn {
+.login-signup-btn {
     font-weight: 600;
     font-size: 1.2em;
-    font-family: Lato, sans-serif;
+    font-family: Open Sans, sans-serif;
+}
+
+
+/***** Styling for onboarding only *****/
+
+.text-container {
+     margin: 0 2em 3em;
+}
+
+.onboarding-text {
+    font-family: Open Sans, sans-serif;
+    font-weight: 200;
+    font-size: 1.2em;
+}
+
+.btn-container-alt {
+    margin: 0  2em 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: var(--ion-color-primary);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 1em;
+}
+
+.dot-selected {
+  height: 15px;
+  width: 15px;
+  background-color: var(--ion-color-secondary);
+  border-radius: 50%;
+  display: inline-block;
+   margin-right: 1em;
+}
+
+.onboarding-btn {
+    height: 50px;
+    width: 50px;
+    color: var(--ion-color-primary)
 }
