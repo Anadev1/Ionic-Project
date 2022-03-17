@@ -10,12 +10,14 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { useHistory } from "react-router-dom";
 import "./Profile.css";
 import { addCircleOutline } from "ionicons/icons";
 import userExamplePhoto from "../images/user-example-photo.png";
 import dogExamplePhoto from "../images/dog-example-photo.png";
 
 const Profile = () => {
+  const history = useHistory();
   return (
     <IonPage>
       <IonHeader>
@@ -48,7 +50,10 @@ const Profile = () => {
         </IonCard>
         <h2 className="dogs-container-title">My Dog(s)</h2>
         <ul className="dogs-container">
-          <li className="dog-container">
+          <li
+            className="dog-container"
+            onClick={() => history.replace("/dogprofile")}
+          >
             <IonImg
               src={dogExamplePhoto}
               className="dog-profile-photo"

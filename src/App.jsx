@@ -15,8 +15,8 @@ import Walks from "./pages/Walks";
 import Add from "./pages/Add";
 import Menu from "./pages/Menu";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Next from './pages/Next';
-import Splash from './pages/Splash';
+import Next from "./pages/Next";
+import Splash from "./pages/Splash";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -40,6 +40,7 @@ import Start from "./pages/Start";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import DogProfile from "./pages/DogProfile";
 import ProfileSetup from "./pages/ProfileSetup";
 import DogProfileSetup from "./pages/DogProfileSetup";
 import Onboarding1 from "./pages/Onboarding1";
@@ -63,13 +64,16 @@ function PrivateRoutes() {
           <Add />
         </Route>
         <Route exact path="/splash">
-            <Splash/>
-          </Route>
+          <Splash />
+        </Route>
         <Route exact path="/profile">
           <Profile />
         </Route>
+        <Route exact path="/dogprofile">
+          <DogProfile />
+        </Route>
         <Route path="/next">
-            <Next/>
+          <Next />
         </Route>
         <Route exact path="/menu">
           <Menu />
