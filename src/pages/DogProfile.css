@@ -1,0 +1,35 @@
+.dog-profile-info-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dog-profile-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+}
+
+.dog-profile-name {
+  font-size: 20px !important;
+}
+
+.dog-profile-photo {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.dog-profile-container {
+  border-bottom: 3px solid var(--ion-color-primary);
+  box-shadow: none;
+  border-radius: 0;
+  padding-bottom: 7px;
+}
+
+.dog-profile-info {
+  margin: 25px 10px;
+  font-size: 18px !important;
+  border-bottom: 1.5px solid var(--ion-color-primary);
+  padding-bottom: 5px;
+}
