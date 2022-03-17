@@ -82,6 +82,10 @@ http://ionicframework.com/docs/theming/ */
     font-style: normal;
 }
 
+.ion-tab-bar {
+  display: none;
+}
+
 @media (prefers-color-scheme: dark) {
   /*
    * Dark Colors

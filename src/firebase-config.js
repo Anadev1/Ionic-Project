@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-
 import { getDatabase, ref } from "firebase/database";
+import { getStorage } from "firebase/storage";
 import { initializeAuth, indexedDBLocalPersistence } from "firebase/auth";
 
 // Your web app's Firebase configuration
@@ -37,3 +37,5 @@ export function getUserRef(userId) {
   return ref(database, "users/" + userId);
 }
 
+// Reference to the storage service
+export const storage = getStorage(app);

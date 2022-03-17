@@ -20,14 +20,13 @@ export default function Onboarding1() {
       <IonContent fullscreen>
         <div className="start-container">
           <h2 className="start-headline-alt">
-            Create a profile for you and your furry friend
+            Welcome to GoWalkies - the dog walking app
           </h2>
         </div>
 
         <div className="text-container">
           <p className="onboarding-text">
-            To use GoWalkies you need a profile for both you and your dog(s)
-            and simply fill in some information.
+            Do you want to exercise your dog more but struggle to find the time? GoWalkies is the app for you!
           </p>
         </div>
 
