@@ -1,47 +1,58 @@
-import { IonContent, IonHeader, IonPage, IonToolbar, IonButtons,IonBackButton, IonLabel, IonRow, IonGrid, IonCol, IonAvatar } from '@ionic/react';
-import './Add.css';
-import dog1 from './assets/dog1.jpg';
-import dog2 from './assets/dog2.jpg';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonLabel,
+  IonRow,
+  IonGrid,
+  IonCol,
+  IonAvatar,
+} from "@ionic/react";
+import "./Add.css";
+import dog1 from "./assets/dog1.jpg";
+import dog2 from "./assets/dog2.jpg";
 import { useHistory } from "react-router-dom";
 import { getAuth } from "firebase/auth";
-import { walksRef } from "../firebase-config";
+import { postsRef } from "../firebase-config";
 import { push, set } from "firebase/database";
-import WalksForm from '../components/WalksForm';
+import PostForm from "../components/PostForm";
 
 const imageClickDog1 = () => {
   var element1 = document.getElementById("dog1");
   var element2 = document.getElementById("dog2");
-  element1.style.fontFamily="bold";
-  element2.style.fontFamily="sans-serif"
-}
+  element1.style.fontFamily = "bold";
+  element2.style.fontFamily = "sans-serif";
+};
 const imageClickDog2 = () => {
   var element1 = document.getElementById("dog1");
   var element2 = document.getElementById("dog2");
-  element2.style.fontFamily="bold";
-  element1.style.fontFamily="sans-serif"
-}
-
+  element2.style.fontFamily = "bold";
+  element1.style.fontFamily = "sans-serif";
+};
 
 export default function Add() {
   const history = useHistory();
   const auth = getAuth();
 
-  async function handleSubmit(newWalk) {
-    newWalk.uid = auth.currentUser.uid;
-    const newWalkRef = push(walksRef);
-    const newWalkKey = newWalkRef.key;
-    console.log(newWalkKey);
-    /* const imageUrl = await uploadImage(newUser.image, newUserKey); 
-    newUser.image = imageUrl; */
-    set(newWalkRef, newWalk)
+    async function handleSubmit(newPost) {
+    newPost.uid = auth.currentUser.uid; // default user id added
+    const newPostRef = push(postsRef); // push new to get reference and new id/key
+    const newPostKey = newPostRef.key; // key from reference
+     console.log(newPostKey);
+    /* const imageUrl = await uploadImage(newPost.image, newPostKey);
+    newPost.image = imageUrl; */
+    set(newPostRef, newPost)
       .then(() => {
         history.replace("/home");
-      })
+        })
       .catch((error) => {
         console.log(error);
-      });
+      })
   }
-  
+
   return (
     <IonPage>
       <IonHeader>
@@ -83,8 +94,8 @@ export default function Add() {
           </IonGrid>
         </div>
 
-        <WalksForm handleSubmit={handleSubmit} />
+        <PostForm handleSubmit={handleSubmit} />
       </IonContent>
     </IonPage>
   );
-};
+}

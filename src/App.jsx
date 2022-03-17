@@ -145,7 +145,7 @@ export default function App() {
         {userIsAuthenticated ? <PrivateRoutes /> : <PublicRoutes />}
         <Route>
           {userIsAuthenticated ? (
-            <Redirect to="/usersetup" />
+            <Redirect to="/home" />
           ) : (
             <Redirect to="/start" />
           )}

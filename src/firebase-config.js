@@ -23,14 +23,14 @@ export const auth = initializeAuth(app, {
 });
 
 const database = getDatabase(app);
-export const walksRef = ref(database, "walks");
+export const postsRef = ref(database, "posts");
 
 export const usersRef = ref(database, "users");
 
 export const dogsRef = ref(database, "dogs");
 // Get reference to specific post using post id
-export function getWalkRef(walkId) {
-  return ref(database, "walks/" + walkId);
+export function getPostRef(postId) {
+  return ref(database, "posts/" + postId);
 }
 // Get reference to specific user using user id
 
