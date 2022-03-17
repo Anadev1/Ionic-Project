@@ -7,9 +7,9 @@
   margin-left: 2rem;
 }
 
-.divider {
-  height: 5px !important;
-  width: 100vw !important;
-  margin: 50px 25px !important;
-  background: orange !important;
+.user-container {
+  border-bottom: 3px solid orange;
+  box-shadow: none;
+  border-radius: 0;
+  padding-bottom: 2rem;
 }

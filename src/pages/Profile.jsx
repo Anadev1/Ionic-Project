@@ -25,11 +25,11 @@ const Profile = () => {
             <IonTitle size="large">Profile</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonCard>
+        <IonCard className="user-container">
           <IonCardContent className="user-info-section">
             <div className="user-image-container">
               <IonImg src="" />
-              <a>Edit</a>
+              <p>Edit</p>
             </div>
 
             <div className="user-info-text">
@@ -38,7 +38,18 @@ const Profile = () => {
             </div>
           </IonCardContent>
         </IonCard>
-        <span className="divider"></span>
+        <IonCard className="dogs-container">
+          <IonCardContent className="dogs-info-section">
+            <div className="dog-image-container">
+              <IonImg src="" />
+            </div>
+
+            <div className="user-info-text">
+              <IonCardSubtitle>Jens Frederiken</IonCardSubtitle>
+              <p>Tordenskjoldgade 2, 3.7, Aarhus C</p>
+            </div>
+          </IonCardContent>
+        </IonCard>
       </IonContent>
     </IonPage>
   );
