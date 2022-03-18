@@ -1,20 +1,23 @@
-import { IonItem, IonInput, IonButton, IonList } from "@ionic/react";
+import { IonItem, IonInput, IonButton, IonList, IonLabel, IonIcon, IonImg} from "@ionic/react";
 import { useState, useEffect } from "react";
-/* import { Camera, CameraResultType } from "@capacitor/camera"; */
+import { Camera, CameraResultType } from "@capacitor/camera";
+import { camera } from "ionicons/icons";
 
 export default function PostForm({ post, handleSubmit }) {
   const [time, setTime] = useState("");
   const [address, setAddress] = useState("");
   const [information, setInformation] = useState("");
-  /* const [image, setImage] = useState("");
-  const [imageFile, setImageFile] = useState({}); */
+  const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState({}); 
+  console.log(image);
+  console.log(setImageFile);
 
   useEffect(() => {
     if (post) {
       setAddress(post.time);
       setAddress(post.address);
       setInformation(post.information);
-      /*setImage(post.image); */
+      setImage(post.image); 
     }
   }, [post]);
 
@@ -23,12 +26,12 @@ export default function PostForm({ post, handleSubmit }) {
     const formData = {
       time: time,
       address: address,
-      information: information /*, image: imageFile*/,
+      information: information, image: imageFile,
     };
     handleSubmit(formData);
   }
 
-  /*
+  
   async function takePicture() {
     const imageOptions = {
       quality: 80,
@@ -40,7 +43,7 @@ export default function PostForm({ post, handleSubmit }) {
     setImageFile(image);
     setImage(image.dataUrl);
   }
-  */
+
 
   return (
     <form onSubmit={submitEvent}>
@@ -70,7 +73,7 @@ export default function PostForm({ post, handleSubmit }) {
           />
         </IonItem>
 
-        {/* <IonItem onClick={takePicture} lines="none">
+        <IonItem onClick={takePicture} lines="none">
           <IonLabel>Choose Image</IonLabel>
           <IonButton>
             <IonIcon slot="icon-only" icon={camera} />
@@ -78,7 +81,7 @@ export default function PostForm({ post, handleSubmit }) {
         </IonItem>
         {image && (
           <IonImg className="ion-padding" src={image} onClick={takePicture} />
-        )} */}
+        )} 
 
         <div className="ion-padding">
           {time && address && information ? (

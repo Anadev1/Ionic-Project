@@ -1,5 +1,7 @@
 {
   "name": "Ionic Project",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }
