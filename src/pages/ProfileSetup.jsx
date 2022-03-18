@@ -16,12 +16,11 @@ import UserForm from "../components/UserForm";
 export default function ProfileSetup() {
   const history = useHistory();
   const auth = getAuth();
-  
 
   async function handleSubmit(newUser) {
-    newUser.uid = auth.currentUser.uid; 
+    newUser.uid = auth.currentUser.uid;
     const newUserRef = push(usersRef);
-    const newUserKey = newUserRef.key; 
+    const newUserKey = newUserRef.key;
     console.log(newUserKey);
     /* const imageUrl = await uploadImage(newUser.image, newUserKey); 
     newUser.image = imageUrl; */
@@ -31,9 +30,9 @@ export default function ProfileSetup() {
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   }
-/*
+  /*
   async function uploadImage(imageFile, postKey) {
     const newImageRef = ref(storage, `${postKey}.${imageFile.format}`);
     await uploadString(newImageRef, imageFile.dataUrl, "data_url");
@@ -59,5 +58,4 @@ export default function ProfileSetup() {
       </IonContent>
     </IonPage>
   );
-};
-
+}

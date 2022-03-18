@@ -9,7 +9,7 @@ import {
   IonIcon,
   IonTitle,
   IonToolbar,
-  IonButton
+  IonButton,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import "./Profile.css";
@@ -20,33 +20,78 @@ import { useState, useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getUserRef } from "../firebase-config";
 import { get } from "@firebase/database";
-
+import { Camera, CameraResultType } from "@capacitor/camera";
+import { camera } from "ionicons/icons";
 
 export default function Profile() {
-const history = useHistory();
-const auth = getAuth();
-const [user, setUser] = useState({});
-const [name, setName] = useState("");
+  const history = useHistory();
+  const auth = getAuth();
+  const [user, setUser] = useState({});
+  const [name, setName] = useState("");
+  const [address, setAddres] = useState("");
+  const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState({});
 
   console.log(name);
 
-useEffect(() => {
-  setUser(auth.currentUser);
+  useEffect(() => {
+    setUser(auth.currentUser);
 
-  async function getUserDataFromDB() {
-    const snapshot = await get(getUserRef(user.uid));
-    const userData = snapshot.val();
-    if (userData) {
-      setName(userData.name);
+    async function getUserDataFromDB() {
+      const snapshot = await get(getUserRef(user.uid));
+      const userData = snapshot.val();
+      if (userData) {
+        setName(userData.name);
+        setAddres(userData.address);
+      }
     }
+
+    if (user) getUserDataFromDB();
+  }, [auth.currentUser, user]);
+
+  function handleSignOut() {
+    signOut(auth);
   }
 
-  if (user) getUserDataFromDB();
-}, [auth.currentUser, user]);
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-function handleSignOut() {
-  signOut(auth);
-}
+    const userToUpdate = {
+      name: name,
+      address: address,
+    };
+
+    if (imageFile.dataUrl) {
+      const imageUrl = await uploadImage();
+      userToUpdate.image = imageUrl;
+    }
+
+    await update(getUserRef(user.uid), userToUpdate);
+    dismissLoader();
+    await Toast.show({
+      text: "User Profile saved!",
+      position: "top",
+    });
+  }
+
+  async function takePicture() {
+    const imageOptions = {
+      quality: 80,
+      width: 500,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+    };
+    const image = await Camera.getPhoto(imageOptions);
+    setImageFile(image);
+    setImage(image.dataUrl);
+  }
+
+  async function uploadImage() {
+    const newImageRef = ref(storage, `${user.uid}.${imageFile.format}`);
+    await uploadString(newImageRef, imageFile.dataUrl, "data_url");
+    const url = await getDownloadURL(newImageRef);
+    return url;
+  }
 
   return (
     <IonPage>
@@ -106,4 +151,4 @@ function handleSignOut() {
       </IonContent>
     </IonPage>
   );
-};
+}
