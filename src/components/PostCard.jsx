@@ -98,10 +98,13 @@ export default function PostListItem({ post }) {
       <IonCardHeader>
         <IonCardTitle>
           <h4>{post.time}</h4>
-          <h4>{post.address}</h4>
+          <div>
+            <h6>{post.time}</h6>
+            <h6>{post.address}</h6>
+          </div>
         </IonCardTitle>
       </IonCardHeader>
-      <IonCardContent>{post.information}</IonCardContent>
+      <IonCardContent>{post.description}</IonCardContent>
     </IonCard>
   );
 }
