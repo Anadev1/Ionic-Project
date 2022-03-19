@@ -34,8 +34,8 @@ export function getPostRef(postId) {
 }
 // Get reference to specific user using user id
 
-export function getUserRef(dogId) {
-  return ref(database, "dogprofile/" + dogId);
+export function getUserRef(userId) {
+  return ref(database, "users/" + userId);
 }
 // Reference to the storage service
 export const storage = getStorage(app);
