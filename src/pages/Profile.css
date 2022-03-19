@@ -1,31 +1,77 @@
-.user-info-section {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-}
-
-.user-image-container {
+.user-container {
+  box-shadow: none;
+  border-radius: 0;
   display: flex;
-  flex-direction: column;
+  margin: 2em 2em 1em;
   align-items: center;
 }
 
-.user-info-text {
-  margin-left: 2rem;
+.img-container {
+  width: 50%;
+}
+
+.user-img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user-info-text h3 {
+  font-size: 1.4em;
+  margin: 0 0 0.5em;
+}
+
+.location-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 
-.user-profile-photo {
-  margin-bottom: 10px;
+.location-container p {
+  margin: 0;
+  font-size: 1.1em;
 }
 
-.user-container {
-  border-bottom: 3px solid var(--ion-color-primary);
-  box-shadow: none;
-  border-radius: 0;
-  padding-bottom: 2rem;
+.location-icon {
+  color: var(--ion-color-primary);
+  padding-right: 10px;
+}
+
+.button-container {
+    border-bottom: 1px solid var(--ion-color-primary);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 2em 1em;
+    padding: 0 0 2em ;
+}
+
+.add-icon {
+  color: var(--ion-color-primary);
+}
+
+.profile-btn {
+  height: 2em;
+  font-family: Open Sans, sans-serif;
+  font-size: 1.25em;
+  font-weight: 200;
+  border-radius: 10px;
+  margin: 1em 0 0;
+  width: 150px;
+}
+
+.profile-btn-alt {
+  height: 2em;
+  font-family: Open Sans, sans-serif;
+  font-size: 1.25em;
+  font-weight: 200;
+  border-radius: 10px;
+  margin: 1em 0 0;
+  width: 150px;
+  color: var(--ion-color-primary);
+  background-color: transparent;
+  border: 1px solid var(--ion-color-primary);
 }
 
 .dogs-container {
@@ -49,9 +95,4 @@
 
 .dogs-container-title {
   margin-left: 1rem;
-}
-
-.add-icon {
-  font-size: 100px;
-  color: var(--ion-color-primary);
 }

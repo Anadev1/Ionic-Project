@@ -13,8 +13,7 @@ import {
   IonLabel,
   useIonModal,
 } from "@ionic/react";
-import { ellipsisHorizontalOutline } from "ionicons/icons";
-import { useHistory } from "react-router-dom";
+import { ellipsisHorizontalOutline, time, locationSharp } from "ionicons/icons";
 import { Toast } from "@capacitor/toast";
 import PostUpdateModal from "./PostUpdateModal";
 import { remove } from "@firebase/database";
@@ -29,7 +28,6 @@ export default function PostListItem({ post }) {
   const [presentUpdateModal, dismissUpdateModal] = useIonModal(
     <PostUpdateModal post={post} dismiss={handleDismissUpdateModal} />
   );
-  const history = useHistory();
   const currentUserId = getAuth().currentUser.uid;
 
   function showActionSheet(event) {
@@ -71,22 +69,17 @@ export default function PostListItem({ post }) {
     });
   }
 
-  function goToUserDetailView() {
-    history.push(`walks/${post.uid}`);
-  }
-
   return (
     <IonCard>
       <IonItem lines="none">
-        <IonAvatar slot="start" onClick={goToUserDetailView}>
+        <IonAvatar slot="start">
           <IonImg src={post.user?.image ? post.user.image : placeholder} />
         </IonAvatar>
-        <IonLabel onClick={goToUserDetailView}>
+        <IonLabel>
           <h2>{post.user?.name ? post.user.name : "Unknown User Name"}</h2>
           <p>
-            {post.user?.address ? post.user.address : "Unknown User Address"}
+            {post.user?.location ? post.user.location : "Unknown User Location"}
           </p>
-          <p>{post.user?.city ? post.user.city : "Unknown User City"}</p>
         </IonLabel>
         {post.uid == currentUserId && (
           <IonButton fill="clear" onClick={showActionSheet}>
@@ -97,12 +90,22 @@ export default function PostListItem({ post }) {
       <IonImg className="post-img" src={post.image} />
       <IonCardHeader>
         <IonCardTitle>
-          <h4>{post.time}</h4>
-          <div>
+          <h4>{post.dogName}</h4>
+        </IonCardTitle>
+        <div className="card-info">
+          <div className="icon-container">
+            <IonIcon className="card-icon" slot="icon-only" icon={time} />
             <h6>{post.time}</h6>
+          </div>
+          <div className="icon-container">
+            <IonIcon
+              className="card-icon"
+              slot="icon-only"
+              icon={locationSharp}
+            />
             <h6>{post.address}</h6>
           </div>
-        </IonCardTitle>
+        </div>
       </IonCardHeader>
       <IonCardContent>{post.description}</IonCardContent>
     </IonCard>

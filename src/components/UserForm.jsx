@@ -1,7 +1,4 @@
 import {
-  IonCard,
-  IonCardContent,
-  IonCardSubtitle,
   IonImg,
   IonIcon,
   IonItem,
@@ -27,8 +24,7 @@ export default function UserForm() {
   const auth = getAuth();
   const [user, setUser] = useState({});
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
+  const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
   const [imageFile, setImageFile] = useState({});
   const [showLoader, dismissLoader] = useIonLoading();
@@ -41,8 +37,7 @@ export default function UserForm() {
       const userData = snapshot.val();
       if (userData) {
         setName(userData.name);
-        setAddress(userData.address);
-        setCity(userData.city);
+        setLocation(userData.location);
         setImage(userData.image);
       }
     }
@@ -56,8 +51,7 @@ export default function UserForm() {
 
     const userToUpdate = {
       name: name,
-      address: address,
-      city: city,
+      location: location,
       image: image,
       uid: user.uid,
     };
@@ -96,64 +90,44 @@ export default function UserForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <IonCard className="user-container">
-        <IonCardContent className="user-info-section">
-          <div className="user-image-container">
-            <IonItem onClick={takePicture} lines="none">
-              <IonLabel>Choose Image</IonLabel>
-              <IonButton>
-                <IonIcon slot="icon-only" icon={camera} />
-              </IonButton>
-            </IonItem>
-            {image && (
-              <IonImg
-                className="user-profile-photo"
-                src={image}
-                onClick={takePicture}
-              />
-            )}
-          </div>
+      <div className="upload-container">
+        <IonItem className="ion-no-padding" onClick={takePicture} lines="none">
+          <IonLabel>Choose image</IonLabel>
+          <IonButton className="upload-btn">
+            <IonIcon className="upload-icon" slot="icon-only" icon={camera} />
+          </IonButton>
+        </IonItem>
+        {image && (
+          <IonImg className="edit-img" src={image} onClick={takePicture} />
+        )}
+      </div>
 
-          <div className="user-info-text">
-            <IonCardSubtitle>{user?.name}</IonCardSubtitle>
-            <p>{user?.address}</p>
-            <p>{user?.city}</p>
-          </div>
-          <IonItem>
-            <IonLabel position="stacked">Name</IonLabel>
-            <IonInput
-              value={name}
-              type="text"
-              placeholder="Type your name"
-              onIonChange={(e) => setName(e.target.value)}
-            />
-          </IonItem>
-          <IonItem>
-            <IonLabel position="stacked">Address</IonLabel>
-            <IonInput
-              value={address}
-              type="text"
-              placeholder="Type your address"
-              onIonChange={(e) => setAddress(e.target.value)}
-            />
-          </IonItem>
-          <IonItem>
-            <IonLabel position="stacked">City</IonLabel>
-            <IonInput
-              value={city}
-              type="text"
-              placeholder="Type your address"
-              onIonChange={(e) => setCity(e.target.value)}
-            />
-          </IonItem>
+      <div className="input-container">
+        <IonItem className="ion-no-padding">
+          <IonLabel position="stacked">Name</IonLabel>
+          <IonInput
+            value={name}
+            type="text"
+            placeholder="Type your name"
+            onIonChange={(e) => setName(e.target.value)}
+          />
+        </IonItem>
+        <IonItem className="ion-no-padding">
+          <IonLabel position="stacked">Location</IonLabel>
+          <IonInput
+            value={location}
+            type="text"
+            placeholder="Type your location"
+            onIonChange={(e) => setLocation(e.target.value)}
+          />
+        </IonItem>
+      </div>
 
-          <div className="ion-padding">
-            <IonButton type="submit" expand="block">
-              Save User
-            </IonButton>
-          </div>
-        </IonCardContent>
-      </IonCard>
+      <div className="btn-container">
+        <IonButton className="save-btn" type="submit" expand="block">
+          Save User
+        </IonButton>
+      </div>
     </form>
   );
 }

@@ -1,7 +1,4 @@
 import {
-  IonCard,
-  IonCardContent,
-  IonCardSubtitle,
   IonContent,
   IonHeader,
   IonImg,
@@ -10,6 +7,7 @@ import {
   IonButton,
   IonButtons,
   IonBackButton,
+  IonIcon
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import "./Profile.css";
@@ -17,14 +15,14 @@ import { useState, useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getUserRef } from "../firebase-config";
 import { get } from "@firebase/database";
+import { locationSharp } from "ionicons/icons";
 
 export default function Profile() {
   const history = useHistory();
   const auth = getAuth();
   const [user, setUser] = useState({});
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
+  const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
 
   useEffect(() => {
@@ -35,8 +33,7 @@ export default function Profile() {
       const userData = snapshot.val();
       if (userData) {
         setName(userData.name);
-        setAddress(userData.address);
-        setCity(userData.city);
+        setLocation(userData.location);
         setImage(userData.image);
       }
     }
@@ -55,24 +52,37 @@ export default function Profile() {
           <IonButtons slot="start">
             <IonBackButton className="back-btn" text="" defaultHref="home" />
           </IonButtons>
+
           <h1 className="topbar-title">Profile</h1>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonCard className="user-container">
-          <IonCardContent className="user-info-section">
-            <div className="user-image-container">
-              <IonImg className="user-profile-photo" src={image} />
-              <p onClick={() => history.replace("/usersetup")}>Edit</p>
-            </div>
+        <div className="user-container">
+          <div className="img-container">
+            <IonImg className="user-img" src={image} />
+          </div>
 
-            <div className="user-info-text">
-              <IonCardSubtitle>{name}</IonCardSubtitle>
-              <p>{address}</p>
-              <p>{city}</p>
+          <div className="user-info-text">
+            <h3>{name}</h3>
+
+            <div className="location-container">
+              <IonIcon className="location-icon" icon={locationSharp} />
+              <p>{location}</p>
             </div>
-          </IonCardContent>
-        </IonCard>
+          </div>
+        </div>
+        <div className="button-container">
+          <IonButton
+            className="profile-btn-alt"
+            fill="outline"
+            onClick={() => history.replace("/usersetup")}
+          >
+            Edit
+          </IonButton>
+          <IonButton className="profile-btn" onClick={handleSignOut}>
+            Log out
+          </IonButton>
+        </div>
 
         {/* <h2 className="dogs-container-title">My Dog(s)</h2>
         <ul className="dogs-container">
@@ -97,8 +107,6 @@ export default function Profile() {
           </li>
           <IonIcon icon={addCircleOutline} className="add-icon" />
         </ul> */}
-
-        <IonButton onClick={handleSignOut}>Log Out</IonButton>
       </IonContent>
     </IonPage>
   );
