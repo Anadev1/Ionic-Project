@@ -7,30 +7,38 @@ import {
   IonImg,
   IonPage,
   IonIcon,
+  IonItem,
   IonTitle,
   IonToolbar,
   IonButton,
+  IonLabel,
+  IonInput,
+  useIonLoading,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import "./Profile.css";
 import { addCircleOutline } from "ionicons/icons";
-import userExamplePhoto from "../images/user-example-photo.png";
+// import userExamplePhoto from "../images/user-example-photo.png";
 import dogExamplePhoto from "../images/dog-example-photo.png";
 import { useState, useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getUserRef } from "../firebase-config";
-import { get } from "@firebase/database";
+import { get, update } from "@firebase/database";
+import { uploadString, ref, getDownloadURL } from "@firebase/storage";
+import { storage } from "../firebase-config";
 import { Camera, CameraResultType } from "@capacitor/camera";
 import { camera } from "ionicons/icons";
+import { Toast } from "@capacitor/toast";
 
 export default function Profile() {
   const history = useHistory();
   const auth = getAuth();
   const [user, setUser] = useState({});
   const [name, setName] = useState("");
-  const [address, setAddres] = useState("");
+  const [address, setAddress] = useState("");
   const [image, setImage] = useState("");
   const [imageFile, setImageFile] = useState({});
+  const [showLoader, dismissLoader] = useIonLoading();
 
   console.log(name);
 
@@ -42,7 +50,7 @@ export default function Profile() {
       const userData = snapshot.val();
       if (userData) {
         setName(userData.name);
-        setAddres(userData.address);
+        setAddress(userData.address);
       }
     }
 
@@ -55,10 +63,12 @@ export default function Profile() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    showLoader();
 
     const userToUpdate = {
       name: name,
       address: address,
+      image: image,
     };
 
     if (imageFile.dataUrl) {
@@ -106,23 +116,58 @@ export default function Profile() {
             <IonTitle size="large">Profile</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonCard className="user-container">
-          <IonCardContent className="user-info-section">
-            <div className="user-image-container">
-              <IonImg
-                src={userExamplePhoto}
-                className="user-profile-photo"
-                alt="user"
-              />
-              <p>Edit</p>
-            </div>
 
-            <div className="user-info-text">
-              <IonCardSubtitle>Jens Frederiken</IonCardSubtitle>
-              <p>Tordenskjoldgade 2, 3.7, Aarhus C</p>
-            </div>
-          </IonCardContent>
-        </IonCard>
+        <form onSubmit={handleSubmit}>
+          <IonCard className="user-container">
+            <IonCardContent className="user-info-section">
+              <div className="user-image-container">
+                <IonItem onClick={takePicture} lines="none">
+                  <IonLabel>Choose Image</IonLabel>
+                  <IonButton>
+                    <IonIcon slot="icon-only" icon={camera} />
+                  </IonButton>
+                </IonItem>
+                {image && (
+                  <IonImg
+                    className="user-profile-photo"
+                    src={image}
+                    onClick={takePicture}
+                  />
+                )}
+              </div>
+
+              <div className="user-info-text">
+                <IonCardSubtitle>{user?.name}</IonCardSubtitle>
+                <p>{user?.address}</p>
+              </div>
+              <IonItem>
+                <IonLabel position="stacked">Name</IonLabel>
+                <IonInput
+                  value={name}
+                  type="text"
+                  placeholder="Type your name"
+                  onIonChange={(e) => setName(e.target.value)}
+                />
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">Title</IonLabel>
+                <IonInput
+                  value={address}
+                  type="text"
+                  placeholder="Type your address"
+                  onIonChange={(e) => setAddress(e.target.value)}
+                />
+              </IonItem>
+
+              <div className="ion-padding">
+                <IonButton type="submit" expand="block">
+                  Save User
+                </IonButton>
+              </div>
+            </IonCardContent>
+          </IonCard>
+        </form>
+
         <h2 className="dogs-container-title">My Dog(s)</h2>
         <ul className="dogs-container">
           <li
