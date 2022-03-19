@@ -22,3 +22,11 @@
   margin: 250px 25px 50px 25px !important;
   width: 88%;
 }
+
+.dog-card {
+  box-shadow: none;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}

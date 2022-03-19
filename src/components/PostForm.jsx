@@ -75,6 +75,7 @@ export default function PostForm({ post, handleSubmit }) {
             <IonLabel position="stacked">The name of your dog</IonLabel>
             <IonInput
               value={dogName}
+              type="text"
               onIonChange={(e) => setDogName(e.target.value)}
               required
             />
@@ -84,6 +85,7 @@ export default function PostForm({ post, handleSubmit }) {
             <IonInput
               className="ion-no-padding"
               value={time}
+              type="text"
               onIonChange={(e) => setTime(e.target.value)}
               required
             />
@@ -94,6 +96,7 @@ export default function PostForm({ post, handleSubmit }) {
             <IonInput
               className="ion-no-padding"
               value={address}
+              type="text"
               onIonChange={(e) => setAddress(e.target.value)}
               required
             />
@@ -105,6 +108,7 @@ export default function PostForm({ post, handleSubmit }) {
             <IonTextarea
               className="add-textarea"
               value={description}
+              type="text"
               onIonChange={(e) => setDescription(e.target.value)}
               required
             />
@@ -117,7 +121,12 @@ export default function PostForm({ post, handleSubmit }) {
               Save
             </IonButton>
           ) : (
-            <IonButton className="save-btn" type="submit" expand="block" disabled>
+            <IonButton
+              className="save-btn"
+              type="submit"
+              expand="block"
+              disabled
+            >
               Save
             </IonButton>
           )}

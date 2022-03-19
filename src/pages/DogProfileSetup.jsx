@@ -2,8 +2,9 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  IonTitle,
   IonToolbar,
+  IonButtons,
+  IonBackButton
 } from "@ionic/react";
 import "./DogProfileSetup.css";
 import { useHistory } from "react-router-dom";
@@ -32,17 +33,14 @@ export default function DogProfileSetup() {
   return (
     <IonPage color="light">
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Dog Profile Setup</IonTitle>
+        <IonToolbar className="topbar">
+          <IonButtons slot="start">
+            <IonBackButton className="back-btn" text="" defaultHref="home" />
+          </IonButtons>
+          <h1 className="topbar-title">Add dog</h1>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Dog Profile Setup</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
         <DogForm handleSubmit={handleSubmit} />
       </IonContent>
     </IonPage>

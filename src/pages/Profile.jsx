@@ -106,20 +106,20 @@ export default function Profile() {
           </IonButton>
         </div>
 
-        <h2 className="dogs-container-title">My Dog(s)</h2>
-        <IonList>
-          {dogs.map((dog) => (
-            <DogListItem dog={dog} key={dog.name} />
-          ))}
-        </IonList>
+        <div className="dogs-container">
+          <h2 className="dogs-container-title">My Dog(s)</h2>
+          <IonList className="ion-no-padding">
+            {dogs.map((dog) => (
+              <DogListItem dog={dog} key={dog.name} />
+            ))}
+          </IonList>
 
-        <IonIcon
-          icon={addCircleOutline}
-          className="add-icon"
-          onClick={() => history.replace("/dogsetup")}
-        />
-
-        <IonButton onClick={handleSignOut}>Log Out</IonButton>
+          <IonIcon
+            icon={addCircleOutline}
+            className="add-icon-alt"
+            onClick={() => history.replace("/dogsetup")}
+          />
+        </div>
       </IonContent>
     </IonPage>
   );

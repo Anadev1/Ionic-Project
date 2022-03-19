@@ -1,33 +1,29 @@
 import {
   IonCard,
   IonCardContent,
-  IonCardSubtitle,
   IonContent,
   IonHeader,
   IonImg,
   IonPage,
-  IonIcon,
-  IonTitle,
+  IonButtons,
+  IonBackButton,
   IonToolbar,
 } from "@ionic/react";
 import "./DogProfile.css";
-import { addCircleOutline } from "ionicons/icons";
 import dogExamplePhoto from "../images/dog-example-photo.png";
 
 const DogProfile = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Profile</IonTitle>
+        <IonToolbar className="topbar">
+          <IonButtons slot="start">
+            <IonBackButton className="back-btn" text="" defaultHref="home" />
+          </IonButtons>
+          <h1 className="topbar-title">Add dog</h1>
         </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Profile</IonTitle>
-          </IonToolbar>
         </IonHeader>
+      <IonContent fullscreen>
         <IonCard className="dog-profile-container">
           <IonCardContent className="dog-profile-info-section">
             <div className="dog-profile-image-container">

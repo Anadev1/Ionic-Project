@@ -3,9 +3,9 @@ import {
   IonInput,
   IonImg,
   IonButton,
-  IonList,
   IonLabel,
   IonIcon,
+  IonTextarea,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -76,68 +76,73 @@ export default function DogForm({ dog, handleSubmit }) {
 
   return (
     <form onSubmit={submitEvent}>
-      <IonItem onClick={takePicture} lines="none">
-        <IonLabel>Choose Image</IonLabel>
-        <IonButton>
-          <IonIcon slot="icon-only" icon={camera} />
-        </IonButton>
-      </IonItem>
-      {image && (
-        <IonImg className="ion-padding" src={image} onClick={takePicture} />
-      )}
-      <IonList>
-        <IonItem>
+      <div className="upload-container">
+        <IonItem className="ion-no-padding" onClick={takePicture} lines="none">
+          <IonLabel>Choose image</IonLabel>
+          <IonButton className="upload-btn">
+            <IonIcon className="upload-icon" slot="icon-only" icon={camera} />
+          </IonButton>
+        </IonItem>
+        {image && (
+          <IonImg className="edit-img" src={image} onClick={takePicture} />
+        )}
+      </div>
+
+      <div className="input-container">
+        <IonItem className="ion-no-padding">
+          <IonLabel position="stacked">Name</IonLabel>
           <IonInput
-            className="input-field"
             value={name}
-            placeholder="Name"
+            type="text"
             onIonChange={(e) => setName(e.target.value)}
             required
           />
         </IonItem>
-        <IonItem>
+        <IonItem className="ion-no-padding">
+          <IonLabel position="stacked">Age</IonLabel>
           <IonInput
-            className="input-field"
             value={age}
-            placeholder="Age"
+            type="text"
             onIonChange={(e) => setAge(e.target.value)}
             required
           />
         </IonItem>
-        <IonItem>
+        <IonItem className="ion-no-padding">
+          <IonLabel position="stacked">Breed</IonLabel>
           <IonInput
-            className="input-field"
             value={breed}
-            placeholder="Breed"
+            type="text"
             onIonChange={(e) => setBreed(e.target.value)}
             required
           />
         </IonItem>
-        <IonItem>
-          <IonInput
-            className="input-field"
+        <IonItem className="ion-no-padding">
+          <IonLabel position="stacked">Additional information</IonLabel>
+          <IonTextarea
+            className="add-textarea"
             value={additionalInfo}
-            placeholder="Additional Information"
+            type="text"
             onIonChange={(e) => setAdditionalInfo(e.target.value)}
             required
           />
         </IonItem>
+      </div>
 
-        <div className="ion-padding">
-          {image && name && age && breed && additionalInfo ? (
-            <IonButton expand="block">Save</IonButton>
-          ) : (
-            <IonButton
-              type="submit"
-              expand="block"
-              disabled
-              onClick={() => history.replace("/profile")}
-            >
-              Save
-            </IonButton>
-          )}
-        </div>
-      </IonList>
+      <div className="ion-padding">
+        {image && name && age && breed && additionalInfo ? (
+          <IonButton expand="block">Save</IonButton>
+        ) : (
+          <IonButton
+            className="save-btn"
+            type="submit"
+            expand="block"
+            disabled
+            onClick={() => history.replace("/profile")}
+          >
+            Save
+          </IonButton>
+        )}
+      </div>
     </form>
   );
 }

@@ -29,7 +29,7 @@ export default function UserForm() {
   const [showLoader, dismissLoader] = useIonLoading();
 
   useEffect(() => {
-    setUser(auth.currentUser);
+    setUser(auth.currentUser)
 
     async function getUserDataFromDB() {
       const snapshot = await get(getUserRef(user.uid));
@@ -107,7 +107,6 @@ export default function UserForm() {
           <IonInput
             value={name}
             type="text"
-            placeholder="Type your name"
             onIonChange={(e) => setName(e.target.value)}
           />
         </IonItem>
@@ -116,13 +115,12 @@ export default function UserForm() {
           <IonInput
             value={location}
             type="text"
-            placeholder="Type your location"
             onIonChange={(e) => setLocation(e.target.value)}
           />
         </IonItem>
       </div>
 
-      <div className="btn-container">
+      <div className="ion-padding">
         <IonButton
           className="save-btn"
           type="submit"
