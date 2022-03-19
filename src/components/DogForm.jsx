@@ -51,6 +51,7 @@ export default function DogForm({ dog, handleSubmit }) {
       <IonList>
         <IonItem>
           <IonInput
+            className="input-field"
             value={name}
             placeholder="Name"
             onIonChange={(e) => setName(e.target.value)}
@@ -59,6 +60,7 @@ export default function DogForm({ dog, handleSubmit }) {
         </IonItem>
         <IonItem>
           <IonInput
+            className="input-field"
             value={age}
             placeholder="Age"
             onIonChange={(e) => setAge(e.target.value)}
@@ -67,6 +69,7 @@ export default function DogForm({ dog, handleSubmit }) {
         </IonItem>
         <IonItem>
           <IonInput
+            className="input-field"
             value={breed}
             placeholder="Breed"
             onIonChange={(e) => setBreed(e.target.value)}
@@ -75,6 +78,7 @@ export default function DogForm({ dog, handleSubmit }) {
         </IonItem>
         <IonItem>
           <IonInput
+            className="input-field"
             value={additionalInfo}
             placeholder="Additional Information"
             onIonChange={(e) => setAdditionalInfo(e.target.value)}

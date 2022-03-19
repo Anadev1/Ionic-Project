@@ -5,34 +5,36 @@ import {
   IonButton,
   IonIcon,
   IonList,
+  IonLabel
 } from "@ionic/react";
 import { useState, useEffect } from "react";
-/* import { Camera, CameraResultType } from "@capacitor/camera"; */
-import { addCircleOutline } from "ionicons/icons";
+import { Camera, CameraResultType } from "@capacitor/camera";
+import { addCircleOutline, camera } from "ionicons/icons";
+
 
 export default function UserForm({ user, handleSubmit }) {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
-  /* const [image, setImage] = useState("");
-  const [imageFile, setImageFile] = useState({}); */
+  const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState({}); 
 
   useEffect(() => {
     if (user) {
       setName(user.name);
       setAddress(user.address);
       setCity(user.city);
-      /*setImage(user.image); */
+      setImage(user.image);
     }
   }, [user]);
 
   function submitEvent(event) {
     event.preventDefault();
-      const formData = { name: name, address: address, city: city /*, image: imageFile*/ };
+      const formData = { name: name, address: address, city: city, image: imageFile };
     handleSubmit(formData);
   }
 
-/*
+
   async function takePicture() {
     const imageOptions = {
       quality: 80,
@@ -44,7 +46,7 @@ export default function UserForm({ user, handleSubmit }) {
     setImageFile(image);
     setImage(image.dataUrl);
   }
-  */
+  
     
   return (
     <form onSubmit={submitEvent}>
@@ -81,7 +83,7 @@ export default function UserForm({ user, handleSubmit }) {
           icon={addCircleOutline} />
         </div>
 
-        {/* <IonItem onClick={takePicture} lines="none">
+        <IonItem onClick={takePicture} lines="none">
           <IonLabel>Choose Image</IonLabel>
           <IonButton>
             <IonIcon slot="icon-only" icon={camera} />
@@ -89,7 +91,7 @@ export default function UserForm({ user, handleSubmit }) {
         </IonItem>
         {image && (
           <IonImg className="ion-padding" src={image} onClick={takePicture} />
-        )} */}
+        )} 
 
         <div className="ion-padding">
           {name && address && city ? (

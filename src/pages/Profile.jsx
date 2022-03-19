@@ -7,9 +7,10 @@ import {
   IonImg,
   IonPage,
   IonIcon,
-  IonTitle,
   IonToolbar,
-  IonButton
+  IonButton,
+  IonButtons,
+  IonBackButton
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import "./Profile.css";
@@ -51,16 +52,14 @@ function handleSignOut() {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Profile</IonTitle>
+        <IonToolbar className="topbar">
+          <IonButtons slot="start">
+            <IonBackButton className="back-btn" text="" defaultHref="home" />
+          </IonButtons>
+          <h1 className="topbar-title">Profile</h1>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Profile</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         <IonCard className="user-container">
           <IonCardContent className="user-info-section">
             <div className="user-image-container">

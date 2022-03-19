@@ -1,12 +1,13 @@
-import { IonItem, IonInput, IonButton, IonList, IonLabel, IonIcon, IonImg} from "@ionic/react";
+import { IonItem, IonInput, IonButton, IonList, IonLabel, IonIcon, IonImg, IonTextarea} from "@ionic/react";
 import { useState, useEffect } from "react";
 import { Camera, CameraResultType } from "@capacitor/camera";
 import { camera } from "ionicons/icons";
 
 export default function PostForm({ post, handleSubmit }) {
+  const [dogName, setDogName] = useState("");
   const [time, setTime] = useState("");
   const [address, setAddress] = useState("");
-  const [information, setInformation] = useState("");
+   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [imageFile, setImageFile] = useState({}); 
   console.log(image);
@@ -14,9 +15,10 @@ export default function PostForm({ post, handleSubmit }) {
 
   useEffect(() => {
     if (post) {
-      setAddress(post.time);
+      setDogName(post.dogName);
+      setTime(post.time);
       setAddress(post.address);
-      setInformation(post.information);
+      setDescription(post.description);
       setImage(post.image); 
     }
   }, [post]);
@@ -24,9 +26,11 @@ export default function PostForm({ post, handleSubmit }) {
   function submitEvent(event) {
     event.preventDefault();
     const formData = {
+      dogName: dogName,
       time: time,
       address: address,
-      information: information, image: imageFile,
+      description: description,
+      image: imageFile,
     };
     handleSubmit(formData);
   }
@@ -48,43 +52,67 @@ export default function PostForm({ post, handleSubmit }) {
   return (
     <form onSubmit={submitEvent}>
       <IonList>
-        <IonItem>
-          <IonInput
-            value={time}
-            placeholder="Date and time"
-            onIonChange={(e) => setTime(e.target.value)}
-            required
-          />
-        </IonItem>
-        <IonItem>
-          <IonInput
-            value={address}
-            placeholder="Address"
-            onIonChange={(e) => setAddress(e.target.value)}
-            required
-          />
-        </IonItem>
-        <IonItem>
-          <IonInput
-            value={information}
-            placeholder="Additional information about the dog"
-            onIonChange={(e) => setInformation(e.target.value)}
-            required
-          />
-        </IonItem>
+        <div className="header-container">
+          <h2>Who's going on a walk today?</h2>
+          <IonItem
+            className="ion-no-padding"
+            onClick={takePicture}
+            lines="none"
+          >
+            <IonLabel className="add-headline">
+              Insert an image of your dog
+            </IonLabel>
+            <IonButton className="upload-btn">
+              <IonIcon className="upload-icon" slot="icon-only" icon={camera} />
+            </IonButton>
+          </IonItem>
+          {image && (
+            <IonImg className="add-img" src={image} onClick={takePicture} />
+          )}
+        </div>
+        <div className="input-container">
+          <IonItem className="ion-no-padding">
+            <IonLabel position="stacked">The name of your dog</IonLabel>
+            <IonInput
+              value={dogName}
+              onIonChange={(e) => setDogName(e.target.value)}
+              required
+            />
+          </IonItem>
+          <IonItem className="ion-no-padding">
+            <IonLabel position="stacked">Date and time</IonLabel>
+            <IonInput
+              className="ion-no-padding"
+              value={time}
+              onIonChange={(e) => setTime(e.target.value)}
+              required
+            />
+          </IonItem>
 
-        <IonItem onClick={takePicture} lines="none">
-          <IonLabel>Choose Image</IonLabel>
-          <IonButton>
-            <IonIcon slot="icon-only" icon={camera} />
-          </IonButton>
-        </IonItem>
-        {image && (
-          <IonImg className="ion-padding" src={image} onClick={takePicture} />
-        )} 
+          <IonItem className="ion-no-padding">
+            <IonLabel position="stacked">Pick up address</IonLabel>
+            <IonInput
+              className="ion-no-padding"
+              value={address}
+              onIonChange={(e) => setAddress(e.target.value)}
+              required
+            />
+          </IonItem>
+          <IonItem className="ion-no-padding">
+            <IonLabel position="stacked" className="add-label">
+              Additional information about the dog
+            </IonLabel>
+            <IonTextarea
+              className="add-textarea"
+              value={description}
+              onIonChange={(e) => setDescription(e.target.value)}
+              required
+            />
+          </IonItem>
+        </div>
 
         <div className="ion-padding">
-          {time && address && information ? (
+          {dogName && description && address ? (
             <IonButton expand="block">Save</IonButton>
           ) : (
             <IonButton type="submit" expand="block" disabled>
