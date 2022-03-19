@@ -2,7 +2,6 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  IonTitle,
   IonToolbar,
   IonText,
   IonList,
@@ -58,16 +57,11 @@ export default function Home() {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Home</IonTitle>
+        <IonToolbar className="topbar">
+          <h1 className="topbar-title">Home</h1>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Home</IonTitle>
-          </IonToolbar>
-        </IonHeader>
 
         <IonList>
           {posts.map((post) => (

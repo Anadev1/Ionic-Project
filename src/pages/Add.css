@@ -1,12 +1,35 @@
-.label{
-    margin-left:10%
-}
-
-.add-dog-container {
+.header-container {
     padding: 1em 2em 1em;
 }
 
-.ion-item {
-    padding: 0;
-    margin: 0;
+.header-container h2 {
+    font-size: 1.25em;
+    font-family: Open Sans, sans-serif;
+    margin-bottom: 1em;
+}
+
+.header-container label {
+    font-family: Open Sans, sans-serif;
+}
+
+.upload-btn {
+    height: 3em;
+    width: 4em;
+}
+
+.add-img {
+    margin-top: 1em;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.add-textarea {
+    height: 150px;
+}
+
+.input-container {
+    padding: 1em 2em 1em;
+    border-bottom: 1px solid var(--ion-color-primary-text);
+    color: var(--ion-color-primary-text);
 }

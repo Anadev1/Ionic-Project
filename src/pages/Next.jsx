@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonButtons,IonBackButton, IonLabel} from '@ionic/react';
 import './Next.css';
-import dog1 from './assets/dog1.jpg';
-import dog2 from './assets/dog2.jpg';
+import dog1 from '../images/dog1.jpg';
+import dog2 from '../images/dog2.jpg';
 const imageClickDog1 = () => {
   var element1 = document.getElementById("dog1");
   var element2 = document.getElementById("dog2");
@@ -38,12 +38,12 @@ const Next = () => {
                   <ion-row>
                     <ion-col size="3">
                       <ion-avatar>
-                        <img src={dog1} onClick={imageClickDog1}/>
+                        <img src={dog1} alt="dog" onClick={imageClickDog1}/>
                       </ion-avatar>
                     </ion-col>
                     <ion-col size="3">
                     <ion-avatar>
-                        <img src={dog2} onClick={imageClickDog2}/>
+                        <img src={dog2} alt="dog" onClick={imageClickDog2}/>
                       </ion-avatar>
                     </ion-col>
                   </ion-row>

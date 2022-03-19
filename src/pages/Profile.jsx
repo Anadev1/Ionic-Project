@@ -8,9 +8,11 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonButton,
   IonIcon,
   IonList,
+  IonButton,
+  IonButtons,
+  IonBackButton,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import "./Profile.css";
@@ -27,6 +29,7 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
   const [image, setImage] = useState("");
   const [dogs, setDogs] = useState([]);
 
@@ -39,6 +42,7 @@ export default function Profile() {
       if (userData) {
         setName(userData.name);
         setAddress(userData.address);
+        setCity(userData.city);
         setImage(userData.image);
       }
     }
@@ -72,17 +76,14 @@ export default function Profile() {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Profile</IonTitle>
+        <IonToolbar className="topbar">
+          <IonButtons slot="start">
+            <IonBackButton className="back-btn" text="" defaultHref="home" />
+          </IonButtons>
+          <h1 className="topbar-title">Profile</h1>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Profile</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
         <IonCard className="user-container">
           <IonCardContent className="user-info-section">
             <div className="user-image-container">
@@ -93,6 +94,7 @@ export default function Profile() {
             <div className="user-info-text">
               <IonCardSubtitle>{name}</IonCardSubtitle>
               <p>{address}</p>
+              <p>{city}</p>
             </div>
           </IonCardContent>
         </IonCard>

@@ -9,22 +9,6 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-primary-background: #fff;
   --ion-color-primary-text: #525252;
 
-  /** secondary **/
-  --ion-color-secondary: #eb8d37;
-  --ion-color-secondary-rgb: 61, 194, 255;
-  --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #36abe0;
-  --ion-color-secondary-tint: #50c8ff;
-
-  /** tertiary **/
-  --ion-color-tertiary: #5260ff;
-  --ion-color-tertiary-rgb: 82, 96, 255;
-  --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #4854e0;
-  --ion-color-tertiary-tint: #6370ff;
-
   /** success **/
   --ion-color-success: #2dd36f;
   --ion-color-success-rgb: 45, 211, 111;
@@ -72,11 +56,15 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --ion-font-family: Open Sans, sans-serif;
 }
 
+/***** Main styling *****/
 .topbar {
     font-family: Permanent Marker, sans-serif;
     color: var(--ion-color-primary);
+
 }
 
 .topbar-title {
@@ -85,6 +73,12 @@ http://ionicframework.com/docs/theming/ */
     margin: auto;
     padding: 0.5em;
 }
+
+.back-btn {
+    position: absolute;
+}
+
+/***** Fonts *****/
 
 @font-face {
 

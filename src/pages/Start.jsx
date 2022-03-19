@@ -9,6 +9,7 @@ import StartImg from "../images/start.jpg";
 import "./Start.css";
 import { useHistory } from "react-router-dom";
 
+
 export default function Start() {
   const history = useHistory();
 

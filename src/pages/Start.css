@@ -62,10 +62,6 @@ form {
     font-family: Open Sans, sans-serif;
 }
 
-.native-input.sc-ion-input-ios {
-    padding: 1em;
-}
-
 .form-container {
     display: flex;
     justify-content: center;
