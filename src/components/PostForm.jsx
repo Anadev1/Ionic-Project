@@ -111,11 +111,13 @@ export default function PostForm({ post, handleSubmit }) {
           </IonItem>
         </div>
 
-        <div className="ion-padding">
-          {dogName && description && address ? (
-            <IonButton expand="block">Save</IonButton>
+        <div className="btn-container">
+          {dogName && time && address && description ? (
+            <IonButton className="save-btn" expand="block">
+              Save
+            </IonButton>
           ) : (
-            <IonButton type="submit" expand="block" disabled>
+            <IonButton className="save-btn" type="submit" expand="block" disabled>
               Save
             </IonButton>
           )}

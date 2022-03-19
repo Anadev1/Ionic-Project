@@ -1,18 +1,12 @@
-.user-photo {
-  width: 150px !important;
-  margin: 50px auto !important;
+.upload-container {
+   padding: 1.5em 2em 1em;
 }
 
-.title-default {
-  text-align: left !important;
-  margin-top: 50px;
-  margin-left: 25px;
-  padding-inline: 0;
-}
-
-.setup-btn {
-  margin: 250px 25px 50px 25px !important;
-  width: 88%;
+.edit-img {
+  margin-top: 1em;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
 }
 
 .dog-container {

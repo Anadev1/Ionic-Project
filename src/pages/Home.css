@@ -1,1 +1,29 @@
+ .card-container {
+     padding: 1em 1em;
+ }
  
+ .card-info {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     width: 100%;
+ }
+
+ .icon-container {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+ }
+
+ .card-icon {
+     width: 2em;
+     height: 2em;
+     color: var(--ion-color-primary);
+     padding-right: 1em;
+ }
+
+ .post-img {
+     width: 100%;
+     height: 300px;
+     object-fit: cover;
+ }

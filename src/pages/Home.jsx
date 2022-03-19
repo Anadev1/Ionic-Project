@@ -3,19 +3,16 @@ import {
   IonHeader,
   IonPage,
   IonToolbar,
-  IonText,
   IonList,
 } from "@ionic/react";
 import "./Home.css";
-import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import PostListItem from "../components/PostCard";
 import { postsRef, usersRef } from "../firebase-config";
 import { onValue, get } from "firebase/database";
 
 export default function Home() {
-  const history = useHistory();
-  const [posts, setPosts] = useState([]);
+   const [posts, setPosts] = useState([]);
 
   async function getUsers() {
     const snapshot = await get(usersRef);
@@ -62,42 +59,12 @@ export default function Home() {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-
-        <IonList>
-          {posts.map((post) => (
-            <PostListItem post={post} key={post.id} />
-          ))}
-        </IonList>
-
-        <div>
-          <IonText
-            class="login-btn"
-            onClick={() => history.replace("/usersetup")}
-          >
-            User set up
-          </IonText>
-          <br></br>
-          <IonText
-            class="login-btn"
-            onClick={() => history.replace("/dogsetup")}
-          >
-            Dog set up
-          </IonText>
-          <br></br>
-          <IonText
-            class="login-btn"
-            onClick={() => history.replace("/onboarding1")}
-          >
-            Onboarding
-          </IonText>
-          <br></br>
-          <IonText class="login-btn" onClick={() => history.replace("/next")}>
-            Next
-          </IonText>
-          <br></br>
-          <IonText class="login-btn" onClick={() => history.replace("/splash")}>
-            Splash
-          </IonText>
+        <div className="card-container">
+          <IonList className="ion-no-padding">
+            {posts.map((post) => (
+              <PostListItem post={post} key={post.id} />
+            ))}
+          </IonList>
         </div>
       </IonContent>
     </IonPage>

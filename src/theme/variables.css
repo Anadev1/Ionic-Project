@@ -72,11 +72,13 @@ http://ionicframework.com/docs/theming/ */
     justify-content: center;
     margin: auto;
     padding: 0.5em;
+    position: relative;
 }
 
 .back-btn {
     position: absolute;
 }
+
 
 /***** Fonts *****/
 
