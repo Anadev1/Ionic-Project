@@ -7,6 +7,7 @@ import {
   IonTabButton,
   IonTabs,
   setupIonicReact,
+  IonLabel
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { home, add, person } from "ionicons/icons";
@@ -90,12 +91,15 @@ function PrivateRoutes() {
       <IonTabBar slot="bottom">
         <IonTabButton tab="home" href="/home">
           <IonIcon icon={home} />
+          <IonLabel>Home</IonLabel>
         </IonTabButton>
         <IonTabButton tab="add" href="/add">
           <IonIcon icon={add} />
+          <IonLabel>Add Walk</IonLabel>
         </IonTabButton>
         <IonTabButton tab="profile" href="/profile">
           <IonIcon icon={person} />
+          <IonLabel>Profile</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

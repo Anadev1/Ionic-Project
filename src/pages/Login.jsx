@@ -47,6 +47,7 @@ export default function Login() {
           <div className="form-container">
             <IonIcon icon={mailSharp} />
             <IonInput
+              className="ion-padding"
               value={mail}
               type="email"
               placeholder="Email"
@@ -56,6 +57,7 @@ export default function Login() {
           <div className="form-container">
             <IonIcon icon={lockClosed} />
             <IonInput
+              className="ion-padding"
               value={password}
               type="password"
               placeholder="Password"

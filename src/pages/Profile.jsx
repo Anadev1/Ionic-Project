@@ -6,29 +6,17 @@ import {
   IonHeader,
   IonImg,
   IonPage,
-  // IonIcon,
-  // IonItem,
-  IonTitle,
   IonToolbar,
   IonButton,
-  // IonLabel,
-  // IonInput,
-  useIonLoading,
+  IonButtons,
+  IonBackButton,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import "./Profile.css";
-// import { addCircleOutline } from "ionicons/icons";
-// import userExamplePhoto from "../images/user-example-photo.png";
-// import dogExamplePhoto from "../images/dog-example-photo.png";
 import { useState, useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getUserRef } from "../firebase-config";
 import { get } from "@firebase/database";
-// import { uploadString, ref, getDownloadURL } from "@firebase/storage";
-// import { storage } from "../firebase-config";
-// import { Camera, CameraResultType } from "@capacitor/camera";
-// import { camera } from "ionicons/icons";
-// import { Toast } from "@capacitor/toast";
 
 export default function Profile() {
   const history = useHistory();
@@ -36,11 +24,8 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
   const [image, setImage] = useState("");
-  // const [imageFile, setImageFile] = useState({});
-  // const [showLoader, dismissLoader] = useIonLoading();
-
-  // console.log(name);
 
   useEffect(() => {
     setUser(auth.currentUser);
@@ -51,6 +36,7 @@ export default function Profile() {
       if (userData) {
         setName(userData.name);
         setAddress(userData.address);
+        setCity(userData.city);
         setImage(userData.image);
       }
     }
@@ -62,63 +48,17 @@ export default function Profile() {
     signOut(auth);
   }
 
-  // async function handleSubmit(event) {
-  //   event.preventDefault();
-  //   showLoader();
-
-  //   const userToUpdate = {
-  //     name: name,
-  //     address: address,
-  //     image: image,
-  //     uid: user.uid,
-  //   };
-
-  //   if (imageFile.dataUrl) {
-  //     const imageUrl = await uploadImage();
-  //     userToUpdate.image = imageUrl;
-  //   }
-
-  //   await update(getUserRef(user.uid), userToUpdate);
-  //   dismissLoader();
-  //   await Toast.show({
-  //     text: "User Profile saved!",
-  //     position: "top",
-  //   });
-  // }
-
-  // async function takePicture() {
-  //   const imageOptions = {
-  //     quality: 80,
-  //     width: 500,
-  //     allowEditing: true,
-  //     resultType: CameraResultType.DataUrl,
-  //   };
-  //   const image = await Camera.getPhoto(imageOptions);
-  //   setImageFile(image);
-  //   setImage(image.dataUrl);
-  // }
-
-  // async function uploadImage() {
-  //   const newImageRef = ref(storage, `${user.uid}.${imageFile.format}`);
-  //   await uploadString(newImageRef, imageFile.dataUrl, "data_url");
-  //   const url = await getDownloadURL(newImageRef);
-  //   return url;
-  // }
-
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Profile</IonTitle>
+        <IonToolbar className="topbar">
+          <IonButtons slot="start">
+            <IonBackButton className="back-btn" text="" defaultHref="home" />
+          </IonButtons>
+          <h1 className="topbar-title">Profile</h1>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Profile</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-
         <IonCard className="user-container">
           <IonCardContent className="user-info-section">
             <div className="user-image-container">
@@ -129,6 +69,7 @@ export default function Profile() {
             <div className="user-info-text">
               <IonCardSubtitle>{name}</IonCardSubtitle>
               <p>{address}</p>
+              <p>{city}</p>
             </div>
           </IonCardContent>
         </IonCard>

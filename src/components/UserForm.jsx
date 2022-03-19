@@ -28,6 +28,7 @@ export default function UserForm() {
   const [user, setUser] = useState({});
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
   const [image, setImage] = useState("");
   const [imageFile, setImageFile] = useState({});
   const [showLoader, dismissLoader] = useIonLoading();
@@ -41,6 +42,7 @@ export default function UserForm() {
       if (userData) {
         setName(userData.name);
         setAddress(userData.address);
+        setCity(userData.city);
         setImage(userData.image);
       }
     }
@@ -55,6 +57,7 @@ export default function UserForm() {
     const userToUpdate = {
       name: name,
       address: address,
+      city: city,
       image: image,
       uid: user.uid,
     };
@@ -114,6 +117,7 @@ export default function UserForm() {
           <div className="user-info-text">
             <IonCardSubtitle>{user?.name}</IonCardSubtitle>
             <p>{user?.address}</p>
+            <p>{user?.city}</p>
           </div>
           <IonItem>
             <IonLabel position="stacked">Name</IonLabel>
@@ -131,6 +135,15 @@ export default function UserForm() {
               type="text"
               placeholder="Type your address"
               onIonChange={(e) => setAddress(e.target.value)}
+            />
+          </IonItem>
+          <IonItem>
+            <IonLabel position="stacked">City</IonLabel>
+            <IonInput
+              value={city}
+              type="text"
+              placeholder="Type your address"
+              onIonChange={(e) => setCity(e.target.value)}
             />
           </IonItem>
 

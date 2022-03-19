@@ -1,7 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonButtons,IonBackButton, IonImg } from '@ionic/react';
-import { Route } from 'workbox-routing';
-import img1 from './assets/dog.png';
-import loading from './assets/loading.png';
+import img1 from '../images/dog.png';
+import loading from '../images/loading.png';
 import './Splash.css';
 
 const Splash = () => {
