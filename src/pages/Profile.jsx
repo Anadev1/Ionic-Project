@@ -6,48 +6,47 @@ import {
   IonHeader,
   IonImg,
   IonPage,
-  IonIcon,
   IonToolbar,
   IonButton,
   IonButtons,
-  IonBackButton
+  IonBackButton,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import "./Profile.css";
-import { addCircleOutline } from "ionicons/icons";
-import userExamplePhoto from "../images/user-example-photo.png";
-import dogExamplePhoto from "../images/dog-example-photo.png";
 import { useState, useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { getUserRef } from "../firebase-config";
 import { get } from "@firebase/database";
 
-
 export default function Profile() {
-const history = useHistory();
-const auth = getAuth();
-const [user, setUser] = useState({});
-const [name, setName] = useState("");
+  const history = useHistory();
+  const auth = getAuth();
+  const [user, setUser] = useState({});
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [image, setImage] = useState("");
 
-  console.log(name);
+  useEffect(() => {
+    setUser(auth.currentUser);
 
-useEffect(() => {
-  setUser(auth.currentUser);
-
-  async function getUserDataFromDB() {
-    const snapshot = await get(getUserRef(user.uid));
-    const userData = snapshot.val();
-    if (userData) {
-      setName(userData.name);
+    async function getUserDataFromDB() {
+      const snapshot = await get(getUserRef(user.uid));
+      const userData = snapshot.val();
+      if (userData) {
+        setName(userData.name);
+        setAddress(userData.address);
+        setCity(userData.city);
+        setImage(userData.image);
+      }
     }
+
+    if (user) getUserDataFromDB();
+  }, [auth.currentUser, user]);
+
+  function handleSignOut() {
+    signOut(auth);
   }
-
-  if (user) getUserDataFromDB();
-}, [auth.currentUser, user]);
-
-function handleSignOut() {
-  signOut(auth);
-}
 
   return (
     <IonPage>
@@ -63,21 +62,19 @@ function handleSignOut() {
         <IonCard className="user-container">
           <IonCardContent className="user-info-section">
             <div className="user-image-container">
-              <IonImg
-                src={userExamplePhoto}
-                className="user-profile-photo"
-                alt="user"
-              />
-              <p>Edit</p>
+              <IonImg className="user-profile-photo" src={image} />
+              <p onClick={() => history.replace("/usersetup")}>Edit</p>
             </div>
 
             <div className="user-info-text">
-              <IonCardSubtitle>Jens Frederiken</IonCardSubtitle>
-              <p>Tordenskjoldgade 2, 3.7, Aarhus C</p>
+              <IonCardSubtitle>{name}</IonCardSubtitle>
+              <p>{address}</p>
+              <p>{city}</p>
             </div>
           </IonCardContent>
         </IonCard>
-        <h2 className="dogs-container-title">My Dog(s)</h2>
+
+        {/* <h2 className="dogs-container-title">My Dog(s)</h2>
         <ul className="dogs-container">
           <li
             className="dog-container"
@@ -99,10 +96,10 @@ function handleSignOut() {
             <p className="dog-name">Amazing</p>
           </li>
           <IonIcon icon={addCircleOutline} className="add-icon" />
-        </ul>
+        </ul> */}
 
         <IonButton onClick={handleSignOut}>Log Out</IonButton>
       </IonContent>
     </IonPage>
   );
-};
+}
