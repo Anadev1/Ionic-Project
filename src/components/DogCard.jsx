@@ -9,18 +9,15 @@ import {
   IonIcon,
   useIonAlert,
   useIonActionSheet,
-  IonAvatar,
-  IonLabel,
 } from "@ionic/react";
 import { ellipsisHorizontalOutline } from "ionicons/icons";
 import { useHistory } from "react-router-dom";
 import { remove } from "@firebase/database";
-import { getPostRef, storage } from "../firebase-config";
+import { getDogRef, storage } from "../firebase-config";
 import { ref, deleteObject } from "@firebase/storage";
 import { getAuth } from "firebase/auth";
-import placeholder from "../images/placeholder.jpg";
 
-export default function PostListItem({ post }) {
+export default function DogListItem({ dog }) {
   const [presentActionSheet] = useIonActionSheet();
   const [presentDeleteDialog] = useIonAlert();
   /*const [presentUpdateModal, dismissUpdateModal] = useIonModal(
@@ -42,11 +39,11 @@ export default function PostListItem({ post }) {
 
   function showDeleteDialog() {
     presentDeleteDialog({
-      header: "Delete Post",
-      message: "Do you want to delete post?",
+      header: "Delete Dog",
+      message: "Do you want to delete this dog?",
       buttons: [
         { text: "No" },
-        { text: "Yes", role: "destructive", handler: deletePost },
+        { text: "Yes", role: "destructive", handler: deleteDog },
       ],
     });
   }
@@ -55,44 +52,44 @@ export default function PostListItem({ post }) {
     dismissUpdateModal();
   }*/
 
-  async function deletePost() {
-    let imageName = post.image.split("/").pop();
+  async function deleteDog() {
+    let imageName = dog.image.split("/").pop();
     imageName = imageName.split("?alt")[0];
     const imageRef = ref(storage, imageName);
     await deleteObject(imageRef);
-    remove(getPostRef(post.id));
+    remove(getDogRef(dog.id));
   }
 
-  function goToUserDetailView() {
-    history.push(`users/${post.uid}`);
+  function goToDogDetailView() {
+    history.push(`dogs/${dog.uid}`);
   }
 
   return (
-    <IonCard>
+    <IonCard onClick={goToDogDetailView}>
       <IonItem lines="none">
-        <IonAvatar slot="start" onClick={goToUserDetailView}>
-          <IonImg src={post.user?.image ? post.user.image : placeholder} />
-        </IonAvatar>
-        <IonLabel onClick={goToUserDetailView}>
-          <h2>{post.user?.name ? post.user.name : "Unknown User Name"}</h2>
-          <p>
-            {post.user?.address ? post.user.address : "Unknown User Address"}
-          </p>
-          <p>{post.user?.city ? post.user.city : "Unknown User City"}</p>
-        </IonLabel>
-        {post.uid === currentUserId && (
+        {/* <IonAvatar slot="start" onClick={goToDogDetailView}>
+          
+        </IonAvatar> */}
+        {dog.uid === currentUserId && (
           <IonButton fill="clear" onClick={showActionSheet}>
             <IonIcon slot="icon-only" icon={ellipsisHorizontalOutline} />
           </IonButton>
         )}
       </IonItem>
-      <IonImg className="post-img" src={post.image} />
+      <IonImg className="dog-img" src={dog.image} />
       <IonCardHeader>
         <IonCardTitle>
-          <h4>{post.title}</h4>
+          <h4>{dog.name}</h4>
         </IonCardTitle>
+        <IonCardTitle>
+          <h4>{dog.age}</h4>
+        </IonCardTitle>
+        <IonCardTitle>
+          <h4>{dog.breed}</h4>
+        </IonCardTitle>
+        <p>{dog.additionalInfo}</p>
+        <p>{dog.uid}</p>
       </IonCardHeader>
-      <IonCardContent>{post.body}</IonCardContent>
     </IonCard>
   );
 }
