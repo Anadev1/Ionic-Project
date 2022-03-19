@@ -101,7 +101,7 @@ export default function Profile() {
         <h2 className="dogs-container-title">My Dog(s)</h2>
         <IonList>
           {dogs.map((dog) => (
-            <DogListItem dog={dog} key={dog.id} />
+            <DogListItem dog={dog} key={dog.name} />
           ))}
         </IonList>
 
