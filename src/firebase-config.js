@@ -28,14 +28,20 @@ export const postsRef = ref(database, "posts");
 export const usersRef = ref(database, "users");
 
 export const dogsRef = ref(database, "dogs");
+
 // Get reference to specific post using post id
 export function getPostRef(postId) {
   return ref(database, "posts/" + postId);
 }
-// Get reference to specific user using user id
 
+// Get reference to specific user using user id
 export function getUserRef(userId) {
   return ref(database, "users/" + userId);
+}
+
+// Get reference to specific dog using post id
+export function getDogRef(dogId) {
+  return ref(database, "dogs/" + dogId);
 }
 // Reference to the storage service
 export const storage = getStorage(app);

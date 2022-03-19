@@ -3,7 +3,7 @@ import {
   IonHeader,
   IonPage,
   IonToolbar,
-  IonList
+  IonList,
 } from "@ionic/react";
 import "./Home.css";
 import { useState, useEffect } from "react";
@@ -14,42 +14,42 @@ import { onValue, get } from "firebase/database";
 export default function Home() {
    const [posts, setPosts] = useState([]);
 
-    async function getUsers() {
-        const snapshot = await get(usersRef);
-        const usersArray = [];
-        snapshot.forEach(postSnapshot => {
-            const id = postSnapshot.key;
-            const data = postSnapshot.val();
-            const post = {
-                id,
-                ...data
-            };
-            usersArray.push(post);
+  async function getUsers() {
+    const snapshot = await get(usersRef);
+    const usersArray = [];
+    snapshot.forEach((postSnapshot) => {
+      const id = postSnapshot.key;
+      const data = postSnapshot.val();
+      const post = {
+        id,
+        ...data,
+      };
+      usersArray.push(post);
+    });
+
+    return usersArray;
+  }
+
+  useEffect(() => {
+    async function listenOnChange() {
+      onValue(postsRef, async (snapshot) => {
+        const users = await getUsers();
+        const postsArray = [];
+        snapshot.forEach((postSnapshot) => {
+          const id = postSnapshot.key;
+          const data = postSnapshot.val();
+          const post = {
+            id,
+            ...data,
+            user: users.find((user) => user.id === data.uid),
+          };
+          postsArray.push(post);
         });
-
-        return usersArray;
+        setPosts(postsArray.reverse());
+      });
     }
-
-    useEffect(() => {
-        async function listenOnChange() {
-            onValue(postsRef, async snapshot => {
-                const users = await getUsers();
-                const postsArray = [];
-                snapshot.forEach(postSnapshot => {
-                    const id = postSnapshot.key;
-                    const data = postSnapshot.val();
-                    const post = {
-                        id,
-                        ...data,
-                        user: users.find(user => user.id == data.uid)
-                    };
-                    postsArray.push(post);
-                });
-                setPosts(postsArray.reverse());
-            });
-        }
-        listenOnChange();
-    }, []);
+    listenOnChange();
+  }, []);
 
   return (
     <IonPage>

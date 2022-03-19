@@ -4,18 +4,20 @@ import {
   IonImg,
   IonPage,
   IonToolbar,
+  IonIcon,
+  IonList,
   IonButton,
   IonButtons,
   IonBackButton,
-  IonIcon
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import "./Profile.css";
 import { useState, useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
-import { getUserRef } from "../firebase-config";
-import { get } from "@firebase/database";
-import { locationSharp } from "ionicons/icons";
+import { getUserRef, dogsRef } from "../firebase-config";
+import { onValue, get } from "@firebase/database";
+import { addCircleOutline, locationSharp } from "ionicons/icons";
+import DogListItem from "../components/DogCard";
 
 export default function Profile() {
   const history = useHistory();
@@ -24,6 +26,7 @@ export default function Profile() {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState("");
+  const [dogs, setDogs] = useState([]);
 
   useEffect(() => {
     setUser(auth.currentUser);
@@ -37,8 +40,27 @@ export default function Profile() {
         setImage(userData.image);
       }
     }
-
     if (user) getUserDataFromDB();
+
+    async function listenOnChange() {
+      onValue(dogsRef, async (snapshot) => {
+        // const users = await getUsers();
+        const dogsArray = [];
+        snapshot.forEach((dogSnapshot) => {
+          const id = dogSnapshot.key;
+          const data = dogSnapshot.val();
+          const dog = {
+            id,
+            ...data,
+          };
+          if (user.uid === dog.id) {
+            dogsArray.push(dog);
+          }
+        });
+        setDogs(dogsArray.reverse());
+      });
+    }
+    listenOnChange();
   }, [auth.currentUser, user]);
 
   function handleSignOut() {
@@ -84,29 +106,20 @@ export default function Profile() {
           </IonButton>
         </div>
 
-        {/* <h2 className="dogs-container-title">My Dog(s)</h2>
-        <ul className="dogs-container">
-          <li
-            className="dog-container"
-            onClick={() => history.replace("/dogprofile")}
-          >
-            <IonImg
-              src={dogExamplePhoto}
-              className="dog-profile-photo"
-              alt="dog"
-            />
-            <p className="dog-name">Amazing</p>
-          </li>
-          <li className="dog-container">
-            <IonImg
-              src={dogExamplePhoto}
-              className="dog-profile-photo"
-              alt="dog"
-            />
-            <p className="dog-name">Amazing</p>
-          </li>
-          <IonIcon icon={addCircleOutline} className="add-icon" />
-        </ul> */}
+        <h2 className="dogs-container-title">My Dog(s)</h2>
+        <IonList>
+          {dogs.map((dog) => (
+            <DogListItem dog={dog} key={dog.name} />
+          ))}
+        </IonList>
+
+        <IonIcon
+          icon={addCircleOutline}
+          className="add-icon"
+          onClick={() => history.replace("/dogsetup")}
+        />
+
+        <IonButton onClick={handleSignOut}>Log Out</IonButton>
       </IonContent>
     </IonPage>
   );

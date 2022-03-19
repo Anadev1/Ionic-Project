@@ -11,7 +11,6 @@ import UserForm from "../components/UserForm";
 
 export default function ProfileSetup() {
 
-
   return (
     <IonPage color="light">
       <IonHeader>

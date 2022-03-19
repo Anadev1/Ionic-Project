@@ -7,9 +7,8 @@ import {
   IonInput,
   useIonLoading,
 } from "@ionic/react";
-// import { useHistory } from "react-router-dom";
-// import "./Profile.css";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { getUserRef } from "../firebase-config";
 import { get, update } from "@firebase/database";
@@ -20,7 +19,7 @@ import { camera } from "ionicons/icons";
 import { Toast } from "@capacitor/toast";
 
 export default function UserForm() {
-  // const history = useHistory();
+  const history = useHistory();
   const auth = getAuth();
   const [user, setUser] = useState({});
   const [name, setName] = useState("");
@@ -124,7 +123,12 @@ export default function UserForm() {
       </div>
 
       <div className="btn-container">
-        <IonButton className="save-btn" type="submit" expand="block">
+        <IonButton
+          className="save-btn"
+          type="submit"
+          expand="block"
+          onClick={() => history.replace("/profile")}
+        >
           Save User
         </IonButton>
       </div>
