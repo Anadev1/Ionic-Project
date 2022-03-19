@@ -88,7 +88,7 @@ export default function PostListItem({ post }) {
           </p>
           <p>{post.user?.city ? post.user.city : "Unknown User City"}</p>
         </IonLabel>
-        {post.uid == currentUserId && (
+        {post.uid === currentUserId && (
           <IonButton fill="clear" onClick={showActionSheet}>
             <IonIcon slot="icon-only" icon={ellipsisHorizontalOutline} />
           </IonButton>
