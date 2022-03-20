@@ -106,19 +106,19 @@ export default function Profile() {
           </IonButton>
         </div>
 
-        <div className="dogs-container">
+        <div className="dog-header">
           <h2 className="dogs-container-title">My Dog(s)</h2>
-          <IonList className="ion-no-padding">
+          <IonList className="ion-no-padding dogs-container">
             {dogs.map((dog) => (
               <DogListItem dog={dog} key={dog.name} />
             ))}
-          </IonList>
 
-          <IonIcon
-            icon={addCircleOutline}
-            className="add-icon-alt"
-            onClick={() => history.replace("/dogsetup")}
-          />
+            <IonIcon
+              icon={addCircleOutline}
+              className="add-icon-alt"
+              onClick={() => history.replace("/dogsetup")}
+            />
+          </IonList>
         </div>
       </IonContent>
     </IonPage>

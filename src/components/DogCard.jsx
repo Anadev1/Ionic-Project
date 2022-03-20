@@ -6,8 +6,9 @@ import {
   IonButton,
   useIonAlert,
   useIonActionSheet,
-  useIonModal
+  useIonModal,
 } from "@ionic/react";
+import { Toast } from "@capacitor/toast";
 import { remove } from "@firebase/database";
 import { getDogRef, storage } from "../firebase-config";
 import { ref, deleteObject } from "@firebase/storage";
@@ -55,15 +56,19 @@ export default function DogListItem({ dog }) {
     const imageRef = ref(storage, imageName);
     await deleteObject(imageRef);
     remove(getDogRef(dog.id));
+
+    await Toast.show({
+      text: "Post deleted!",
+      position: "center",
+    });
   }
 
   return (
     <IonCard className="dog-card">
       {dog.uid === currentUserId && (
-        <IonButton fill="clear" onClick={showActionSheet}></IonButton>
+        <IonButton onClick={showActionSheet}></IonButton>
       )}
-
-      <IonImg className="user-img" src={dog.image} onClick={showActionSheet} />
+      <IonImg className="dog-img" src={dog.image} />
       <IonCardHeader>
         <IonCardTitle>
           <h4>{dog.name}</h4>

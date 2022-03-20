@@ -35,7 +35,7 @@ export default function DogProfileSetup() {
       <IonHeader>
         <IonToolbar className="topbar">
           <IonButtons slot="start">
-            <IonBackButton className="back-btn" text="" defaultHref="home" />
+            <IonBackButton className="back-btn" text="" defaultHref="profile" />
           </IonButtons>
           <h1 className="topbar-title">Add dog</h1>
         </IonToolbar>
