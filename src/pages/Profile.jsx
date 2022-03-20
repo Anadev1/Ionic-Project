@@ -18,6 +18,7 @@ import { getUserRef, dogsRef } from "../firebase-config";
 import { onValue, get } from "@firebase/database";
 import { addCircleOutline, locationSharp } from "ionicons/icons";
 import DogListItem from "../components/DogCard";
+import placeholder from "../images/placeholder.jpg";
 
 export default function Profile() {
   const history = useHistory();
@@ -81,15 +82,18 @@ export default function Profile() {
       <IonContent fullscreen>
         <div className="user-container">
           <div className="img-container">
-            <IonImg className="user-img" src={image} />
+            <IonImg
+              className="user-img"
+              src={image ? image : placeholder}
+            />
           </div>
 
           <div className="user-info-text">
-            <h3>{name}</h3>
+            <h3>{name ? name : "Unknown name"}</h3>
 
             <div className="location-container">
               <IonIcon className="location-icon" icon={locationSharp} />
-              <p>{location}</p>
+              <p>{location ? location : "Unknown location"}</p>
             </div>
           </div>
         </div>

@@ -79,11 +79,17 @@ http://ionicframework.com/docs/theming/ */
     position: absolute;
 }
 
+.button-solid {
+    --background-activated: var(--ion-color-primary-shade, #eb8d37);
+    --background-focused: var(--ion-color-primary-shade, #eb8d37);
+    --background-hover: var(--ion-color-primary-tint, #eb8d37);
+    --background-activated-opacity: 1;
+}
+
 
 /***** Fonts *****/
 
 @font-face {
-
     font-family: "PermanentMarker";
     src: url("../font/PermanentMarker-Regular.ttf") format("truetype");
     font-weight: 500;
