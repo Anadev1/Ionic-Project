@@ -21,6 +21,7 @@ import { getPostRef, storage } from "../firebase-config";
 import { ref, deleteObject } from "@firebase/storage";
 import { getAuth } from "firebase/auth";
 import placeholder from "../images/placeholder.jpg";
+import { useHistory } from "react-router";
 
 export default function PostListItem({ post }) {
   
@@ -29,6 +30,7 @@ export default function PostListItem({ post }) {
   const [presentUpdateModal, dismissUpdateModal] = useIonModal(
     <PostUpdateModal post={post} dismiss={handleDismissUpdateModal} />
   );
+  const history = useHistory();
   const currentUserId = getAuth().currentUser.uid;
 
   function showActionSheet(event) {
@@ -70,13 +72,18 @@ export default function PostListItem({ post }) {
     });
   }
 
+  function goToUserDetailView() {
+    history.push(`users/${post.uid}`);
+  }
+
+
   return (
     <IonCard>
       <IonItem lines="none">
-        <IonAvatar slot="start">
+        <IonAvatar slot="start" onClick={goToUserDetailView}>
           <IonImg src={post.user?.image ? post.user.image : placeholder} />
         </IonAvatar>
-        <IonLabel>
+        <IonLabel onClick={goToUserDetailView}>
           <h2>{post.user?.name ? post.user.name : "Unknown User Name"}</h2>
           <p>
             {post.user?.location ? post.user.location : "Unknown User Location"}
