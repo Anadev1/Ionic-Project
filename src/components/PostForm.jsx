@@ -1,4 +1,4 @@
-import { IonItem, IonInput, IonButton, IonList, IonLabel, IonIcon, IonImg, IonTextarea} from "@ionic/react";
+import { IonItem, IonInput, IonButton, IonList, IonLabel, IonIcon, IonImg, IonTextarea, IonDatetime} from "@ionic/react";
 import { useState, useEffect } from "react";
 import { Camera, CameraResultType } from "@capacitor/camera";
 import { camera } from "ionicons/icons";
@@ -82,7 +82,11 @@ export default function PostForm({ post, handleSubmit }) {
           </IonItem>
           <IonItem className="ion-no-padding">
             <IonLabel position="stacked">Date and time</IonLabel>
-            <IonInput
+            <IonDatetime
+              locale="en-DA"
+              hour-cycle="h23"
+              minuteValues="0,15,30,45"
+              displayFormat="D MMM YYYY H:mm"
               className="ion-no-padding"
               value={time}
               type="text"

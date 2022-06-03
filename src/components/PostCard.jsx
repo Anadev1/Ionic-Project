@@ -23,6 +23,7 @@ import { getAuth } from "firebase/auth";
 import placeholder from "../images/placeholder.jpg";
 
 export default function PostListItem({ post }) {
+  
   const [presentActionSheet] = useIonActionSheet();
   const [presentDeleteDialog] = useIonAlert();
   const [presentUpdateModal, dismissUpdateModal] = useIonModal(
