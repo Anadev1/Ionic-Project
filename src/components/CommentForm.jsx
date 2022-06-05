@@ -16,6 +16,7 @@ export default function CommentForm({ comment, handleSubmit }) {
 
   function submitEvent(event) {
     event.preventDefault();
+    setMessage("");
     const formData = {
       message: message,
     };

@@ -29,10 +29,13 @@
  }
 
  .comment-container {
-    padding: 1em 2em 1em;
     display: flex;
-    color: var(--ion-color-primary-text);
     width: 100%;
+}
+
+.comment-section {
+    padding: 1em 2em 1em;
+    color: var(--ion-color-primary-text);
 }
 
 .comment-btn {

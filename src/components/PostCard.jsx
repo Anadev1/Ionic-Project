@@ -12,7 +12,7 @@ import {
   IonAvatar,
   IonLabel,
   useIonModal,
-  useIonLoading,
+  IonList,
 } from "@ionic/react";
 import { ellipsisHorizontalOutline, time, locationSharp } from "ionicons/icons";
 import { Toast } from "@capacitor/toast";
@@ -24,11 +24,53 @@ import { getAuth } from "firebase/auth";
 import placeholder from "../images/placeholder.jpg";
 import { useHistory } from "react-router";
 import CommentForm from "../components/CommentForm";
-import { commentsRef } from "../firebase-config";
+import { postsRef, commentsRef } from "../firebase-config";
 import { push, set } from "firebase/database";
+import { useEffect, useState } from "react";
+import { onValue, get } from "firebase/database";
+import CommentListItem from "../components/CommentCard";
+
 
 export default function PostListItem({ post }) {
-  
+  const [comments, setComments] = useState([]);
+
+  async function getPosts() {
+    const snapshot = await get(postsRef);
+    const postsArray = [];
+    snapshot.forEach((postSnapshot) => {
+      const id = postSnapshot.key;
+      const data = postSnapshot.val();
+      const post = {
+        id,
+        ...data,
+      };
+      postsArray.push(post);
+    });
+
+    return postsArray;
+  }
+
+  useEffect(() => {
+    async function listenOnChange() {
+      onValue(commentsRef, async (snapshot) => {
+        const posts = await getPosts();
+        const commentsArray = [];
+        snapshot.forEach((postSnapshot) => {
+          const id = postSnapshot.key;
+          const data = postSnapshot.val();
+          const post = {
+            id,
+            ...data,
+            post: posts.find((post) => post.id === data.uid),
+          };
+          commentsArray.push(post);
+        });
+        setComments(commentsArray.reverse());
+      });
+    }
+    listenOnChange();
+  }, []);
+
   const [presentActionSheet] = useIonActionSheet();
   const [presentDeleteDialog] = useIonAlert();
   const [presentUpdateModal, dismissUpdateModal] = useIonModal(
@@ -80,11 +122,10 @@ export default function PostListItem({ post }) {
     history.push(`users/${post.uid}`);
   }
 
-  const [showLoader, dismissLoader] = useIonLoading();
   const auth = getAuth();
 
   async function handleSubmit(newComment) {
-    showLoader();
+
     newComment.uid = auth.currentUser.uid; // default user id added
     const newCommentRef = push(commentsRef); // push new to get reference and new id/key
     const newCommentKey = newCommentRef.key; // key from reference
@@ -99,9 +140,6 @@ export default function PostListItem({ post }) {
       .catch((error) => {
         console.log(error);
       })
-      .finally(() => {
-        dismissLoader();
-      });
   }
 
 
@@ -145,7 +183,15 @@ export default function PostListItem({ post }) {
       </IonCardHeader>
       <IonCardContent>{post.description}</IonCardContent>
 
-      <CommentForm handleSubmit={handleSubmit} />
+      <div className="comment-section">
+        <h2>Comments</h2>
+        <IonList className="ion-no-padding">
+          {comments.map((comment) => (
+            <CommentListItem post={comment} key={comment.id} />
+          ))}
+        </IonList>
+        <CommentForm handleSubmit={handleSubmit} />
+      </div>
     </IonCard>
   );
 }
