@@ -12,6 +12,7 @@ import {
   IonAvatar,
   IonLabel,
   useIonModal,
+  useIonLoading,
 } from "@ionic/react";
 import { ellipsisHorizontalOutline, time, locationSharp } from "ionicons/icons";
 import { Toast } from "@capacitor/toast";
@@ -22,6 +23,9 @@ import { ref, deleteObject } from "@firebase/storage";
 import { getAuth } from "firebase/auth";
 import placeholder from "../images/placeholder.jpg";
 import { useHistory } from "react-router";
+import CommentForm from "../components/CommentForm";
+import { commentsRef } from "../firebase-config";
+import { push, set } from "firebase/database";
 
 export default function PostListItem({ post }) {
   
@@ -76,6 +80,30 @@ export default function PostListItem({ post }) {
     history.push(`users/${post.uid}`);
   }
 
+  const [showLoader, dismissLoader] = useIonLoading();
+  const auth = getAuth();
+
+  async function handleSubmit(newComment) {
+    showLoader();
+    newComment.uid = auth.currentUser.uid; // default user id added
+    const newCommentRef = push(commentsRef); // push new to get reference and new id/key
+    const newCommentKey = newCommentRef.key; // key from reference
+    console.log(newCommentKey);
+    set(newCommentRef, newComment)
+      .then(() => {
+        history.replace("/home");
+        Toast.show({
+          text: "New comment created!",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        dismissLoader();
+      });
+  }
+
 
   return (
     <IonCard>
@@ -116,6 +144,8 @@ export default function PostListItem({ post }) {
         </div>
       </IonCardHeader>
       <IonCardContent>{post.description}</IonCardContent>
+
+      <CommentForm handleSubmit={handleSubmit} />
     </IonCard>
   );
 }
