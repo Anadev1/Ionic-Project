@@ -15,7 +15,7 @@ import { ref, deleteObject } from "@firebase/storage";
 import { getAuth } from "firebase/auth";
 import DogUpdateModal from "./DogUpdateModal";
 
-export default function DogListItem({ dog }) {
+export default function DogListItem({ dog,onClick }) {
   const [presentActionSheet] = useIonActionSheet();
   const [presentDeleteDialog] = useIonAlert();
   const [presentUpdateModal, dismissUpdateModal] = useIonModal(
@@ -62,13 +62,12 @@ export default function DogListItem({ dog }) {
       position: "center",
     });
   }
-
   return (
     <IonCard className="dog-card">
       {dog.uid === currentUserId && (
         <IonButton onClick={showActionSheet}></IonButton>
       )}
-      <IonImg className="dog-img" src={dog.image} />
+      <IonImg className="dog-img" src={dog.image} onClick={onClick}/>
       <IonCardHeader>
         <IonCardTitle>
           <h4>{dog.name}</h4>

@@ -11,14 +11,16 @@ import {
 } from "@ionic/react";
 import "./DogProfile.css";
 import dogExamplePhoto from "../images/dog-example-photo.png";
+import { useHistory } from "react-router-dom";
 
-const DogProfile = () => {
+export default function DogProfile() {
+   const history = useHistory();
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar className="topbar">
           <IonButtons slot="start">
-            <IonBackButton className="back-btn" text="" defaultHref="home" />
+            <IonBackButton className="back-btn" text="" defaultHref="profile" />
           </IonButtons>
           <h1 className="topbar-title">Add dog</h1>
         </IonToolbar>
@@ -28,26 +30,22 @@ const DogProfile = () => {
           <IonCardContent className="dog-profile-info-section">
             <div className="dog-profile-image-container">
               <IonImg
-                src={dogExamplePhoto}
+                src={history.location.state.dog.image}
                 className="dog-profile-photo"
                 alt="user"
               />
-              <p className="dog-profile-name">Beautiful doggo</p>
+              <p className="dog-profile-name">{history.location.state.dog.name}</p>
             </div>
           </IonCardContent>
         </IonCard>
         <div className="dog-profile-info-container">
-          <p className="dog-profile-breed dog-profile-info">Border Collie</p>
-          <p className="dog-profile-age dog-profile-info">2 years old </p>
+          <p className="dog-profile-breed dog-profile-info">{history.location.state.dog.breed}</p>
+          <p className="dog-profile-age dog-profile-info">{history.location.state.dog.age} </p>
           <p className="dog-profile-other-info dog-profile-info">
-            This dog is amazing. If you do anything to my dog I swear I will
-            kill you with my bare hands. He likes snacks and long walks along
-            the beach
+            {history.location.state.dog.additionalInfo}
           </p>
         </div>
       </IonContent>
     </IonPage>
   );
-};
-
-export default DogProfile;
+}
