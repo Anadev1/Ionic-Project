@@ -32,6 +32,8 @@ import CommentListItem from "../components/CommentCard";
 
 
 export default function PostListItem({ post }) {
+
+  // Comments 
   const [comments, setComments] = useState([]);
 
   async function getPosts() {
@@ -71,11 +73,13 @@ export default function PostListItem({ post }) {
     listenOnChange();
   }, []);
 
+  // Edit, delete, user detail functionality
   const [presentActionSheet] = useIonActionSheet();
   const [presentDeleteDialog] = useIonAlert();
   const [presentUpdateModal, dismissUpdateModal] = useIonModal(
     <PostUpdateModal post={post} dismiss={handleDismissUpdateModal} />
   );
+
   const history = useHistory();
   const currentUserId = getAuth().currentUser.uid;
 
@@ -123,6 +127,8 @@ export default function PostListItem({ post }) {
   }
 
   const auth = getAuth();
+
+  // Comments 
 
   async function handleSubmit(newComment) {
 
