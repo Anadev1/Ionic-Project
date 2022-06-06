@@ -1,17 +1,28 @@
-import { IonItem, IonInput, IonButton, IonList, IonLabel, IonIcon, IonImg, IonTextarea, IonDatetime} from "@ionic/react";
+import {
+  IonItem,
+  IonInput,
+  IonButton,
+  IonList,
+  IonLabel,
+  IonIcon,
+  IonImg,
+  IonTextarea,
+  IonDatetime,
+} from "@ionic/react";
 import { useState, useEffect } from "react";
+import Select from "react-select";
 import { Camera, CameraResultType } from "@capacitor/camera";
 import { camera } from "ionicons/icons";
+import AddressesService from "../services/addressesService";
 
 export default function PostForm({ post, handleSubmit }) {
   const [dogName, setDogName] = useState("");
   const [time, setTime] = useState("");
   const [address, setAddress] = useState("");
-   const [description, setDescription] = useState("");
+  const [data, setData] = useState([]);
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [imageFile, setImageFile] = useState({}); 
-  console.log(image);
-  console.log(setImageFile);
+  const [imageFile, setImageFile] = useState({});
 
   useEffect(() => {
     if (post) {
@@ -19,7 +30,7 @@ export default function PostForm({ post, handleSubmit }) {
       setTime(post.time);
       setAddress(post.address);
       setDescription(post.description);
-      setImage(post.image); 
+      setImage(post.image);
     }
   }, [post]);
 
@@ -28,14 +39,13 @@ export default function PostForm({ post, handleSubmit }) {
     const formData = {
       dogName: dogName,
       time: time,
-      address: address,
+      address: address.value,
       description: description,
       image: imageFile,
     };
     handleSubmit(formData);
   }
 
-  
   async function takePicture() {
     const imageOptions = {
       quality: 80,
@@ -48,6 +58,11 @@ export default function PostForm({ post, handleSubmit }) {
     setImage(image.dataUrl);
   }
 
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
 
   return (
     <form onSubmit={submitEvent}>
@@ -94,7 +109,7 @@ export default function PostForm({ post, handleSubmit }) {
               required
             />
           </IonItem>
-
+          {/* 
           <IonItem className="ion-no-padding">
             <IonLabel position="stacked">Pick up address</IonLabel>
             <IonInput
@@ -104,7 +119,7 @@ export default function PostForm({ post, handleSubmit }) {
               onIonChange={(e) => setAddress(e.target.value)}
               required
             />
-          </IonItem>
+          </IonItem> */}
           <IonItem className="ion-no-padding">
             <IonLabel position="stacked" className="add-label">
               Additional information about the dog
@@ -118,24 +133,21 @@ export default function PostForm({ post, handleSubmit }) {
             />
           </IonItem>
         </div>
-
-        <div className="btn-container">
-          {dogName && time && address && description ? (
-            <IonButton className="save-btn" expand="block">
-              Save
-            </IonButton>
-          ) : (
-            <IonButton
-              className="save-btn"
-              type="submit"
-              expand="block"
-              disabled
-            >
-              Save
-            </IonButton>
-          )}
-        </div>
       </IonList>
+
+      <Select onChange={setAddress} options={options} value={address} />
+
+      <div className="btn-container">
+        {dogName && time && address && description ? (
+          <IonButton className="save-btn" expand="block">
+            Save
+          </IonButton>
+        ) : (
+          <IonButton className="save-btn" type="submit" expand="block" disabled>
+            Save
+          </IonButton>
+        )}
+      </div>
     </form>
   );
 }
