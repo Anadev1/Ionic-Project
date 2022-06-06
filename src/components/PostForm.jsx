@@ -13,18 +13,26 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import { Camera, CameraResultType } from "@capacitor/camera";
 import { camera } from "ionicons/icons";
-import AddressesService from "../services/addressesService";
 
 export default function PostForm({ post, handleSubmit }) {
   const [dogName, setDogName] = useState("");
   const [time, setTime] = useState("");
   const [address, setAddress] = useState("");
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [imageFile, setImageFile] = useState({});
 
   useEffect(() => {
+    // async function getData() {
+    //   const url =
+    //     "https://api.dataforsyningen.dk/adresser?format=json&kommunekode=0751";
+    //   const response = await fetch(url);
+    //   const responseData = await response.json();
+    //   setData(responseData.data);
+    // }
+    // getData();
+
     if (post) {
       setDogName(post.dogName);
       setTime(post.time);
@@ -58,10 +66,49 @@ export default function PostForm({ post, handleSubmit }) {
     setImage(image.dataUrl);
   }
 
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+  const addresses = [
+    { value: "Rosenhøj 66, 8260 Viby J", label: "Rosenhøj 66, 8260 Viby J" },
+    { value: "Egå Marina 327, 8250 Egå", label: "Egå Marina 327, 8250 Egå" },
+    {
+      value: "Jægergårdsgade 90A, 8000 Aarhus C",
+      label: "Jægergårdsgade 90A, 8000 Aarhus C",
+    },
+    {
+      value: "Salamanderparken 74, 8260 Viby J",
+      label: "Salamanderparken 74, 8260 Viby J",
+    },
+    {
+      value: "Egå Marina 618, 8250 Egå",
+      label: "Egå Marina 618, 8250 Egå",
+    },
+    {
+      value: "Tretommervej 68, 8240 Risskov",
+      label: "Tretommervej 68, 8240 Risskov",
+    },
+    {
+      value: "Egå Marina 363, 8250 Egå",
+      label: "Egå Marina 363, 8250 Egå",
+    },
+
+    {
+      value: "Laskedalen 78, 8220 Brabrand",
+      label: "Laskedalen 78, 8220 Brabrand",
+    },
+
+    {
+      value: "Rosenvænget 29, Løgten, 8541 Skødstrup",
+      label: "Rosenvænget 29, Løgten, 8541 Skødstrup",
+    },
+
+    {
+      value: "Tilst Parkvej 161, 8381 Tilst",
+      label: "Tilst Parkvej 161, 8381 Tilst",
+    },
+
+    {
+      value: "Østergårdsparken 41, 8310 Tranbjerg J",
+      label: "Østergårdsparken 41, 8310 Tranbjerg J",
+    },
   ];
 
   return (
@@ -109,17 +156,6 @@ export default function PostForm({ post, handleSubmit }) {
               required
             />
           </IonItem>
-          {/* 
-          <IonItem className="ion-no-padding">
-            <IonLabel position="stacked">Pick up address</IonLabel>
-            <IonInput
-              className="ion-no-padding"
-              value={address}
-              type="text"
-              onIonChange={(e) => setAddress(e.target.value)}
-              required
-            />
-          </IonItem> */}
           <IonItem className="ion-no-padding">
             <IonLabel position="stacked" className="add-label">
               Additional information about the dog
@@ -134,9 +170,15 @@ export default function PostForm({ post, handleSubmit }) {
           </IonItem>
         </div>
       </IonList>
-
-      <Select onChange={setAddress} options={options} value={address} />
-
+      <IonLabel position="stacked" className="address-label">
+        Pick up address
+      </IonLabel>
+      <Select
+        onChange={setAddress}
+        options={addresses}
+        value={address}
+        className="add-address"
+      />
       <div className="btn-container">
         {dogName && time && address && description ? (
           <IonButton className="save-btn" expand="block">
