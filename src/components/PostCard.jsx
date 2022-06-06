@@ -12,6 +12,7 @@ import {
   IonAvatar,
   IonLabel,
   useIonModal,
+  IonList,
 } from "@ionic/react";
 import { ellipsisHorizontalOutline, time, locationSharp } from "ionicons/icons";
 import { Toast } from "@capacitor/toast";
@@ -21,14 +22,65 @@ import { getPostRef, storage } from "../firebase-config";
 import { ref, deleteObject } from "@firebase/storage";
 import { getAuth } from "firebase/auth";
 import placeholder from "../images/placeholder.jpg";
+import { useHistory } from "react-router";
+import CommentForm from "../components/CommentForm";
+import { postsRef, commentsRef } from "../firebase-config";
+import { push, set } from "firebase/database";
+import { useEffect, useState } from "react";
+import { onValue, get } from "firebase/database";
+import CommentListItem from "../components/CommentCard";
+
 
 export default function PostListItem({ post }) {
-  
+
+  // Comments 
+  const [comments, setComments] = useState([]);
+
+  async function getPosts() {
+    const snapshot = await get(postsRef);
+    const postsArray = [];
+    snapshot.forEach((postSnapshot) => {
+      const id = postSnapshot.key;
+      const data = postSnapshot.val();
+      const post = {
+        id,
+        ...data,
+      };
+      postsArray.push(post);
+    });
+
+    return postsArray;
+  }
+
+  useEffect(() => {
+    async function listenOnChange() {
+      onValue(commentsRef, async (snapshot) => {
+        const posts = await getPosts();
+        const commentsArray = [];
+        snapshot.forEach((postSnapshot) => {
+          const id = postSnapshot.key;
+          const data = postSnapshot.val();
+          const post = {
+            id,
+            ...data,
+            post: posts.find((post) => post.id === data.uid),
+          };
+          commentsArray.push(post);
+        });
+        setComments(commentsArray.reverse());
+      });
+    }
+    listenOnChange();
+  }, []);
+
+  // Edit, delete, user detail functionality
   const [presentActionSheet] = useIonActionSheet();
   const [presentDeleteDialog] = useIonAlert();
   const [presentUpdateModal, dismissUpdateModal] = useIonModal(
     <PostUpdateModal post={post} dismiss={handleDismissUpdateModal} />
   );
+
+  const history = useHistory();
   const currentUserId = getAuth().currentUser.uid;
 
   function showActionSheet(event) {
@@ -70,13 +122,40 @@ export default function PostListItem({ post }) {
     });
   }
 
+  function goToUserDetailView() {
+    history.push(`users/${post.uid}`);
+  }
+
+  const auth = getAuth();
+
+  // Comments 
+
+  async function handleSubmit(newComment) {
+
+    newComment.uid = auth.currentUser.uid; // default user id added
+    const newCommentRef = push(commentsRef); // push new to get reference and new id/key
+    const newCommentKey = newCommentRef.key; // key from reference
+    console.log(newCommentKey);
+    set(newCommentRef, newComment)
+      .then(() => {
+        history.replace("/home");
+        Toast.show({
+          text: "New comment created!",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+
   return (
     <IonCard>
       <IonItem lines="none">
-        <IonAvatar slot="start">
+        <IonAvatar slot="start" onClick={goToUserDetailView}>
           <IonImg src={post.user?.image ? post.user.image : placeholder} />
         </IonAvatar>
-        <IonLabel>
+        <IonLabel onClick={goToUserDetailView}>
           <h2>{post.user?.name ? post.user.name : "Unknown User Name"}</h2>
           <p>
             {post.user?.location ? post.user.location : "Unknown User Location"}
@@ -109,6 +188,16 @@ export default function PostListItem({ post }) {
         </div>
       </IonCardHeader>
       <IonCardContent>{post.description}</IonCardContent>
+
+      <div className="comment-section">
+        <h2>Comments</h2>
+        <IonList className="ion-no-padding">
+          {comments.map((comment) => (
+            <CommentListItem post={comment} key={comment.id} />
+          ))}
+        </IonList>
+        <CommentForm handleSubmit={handleSubmit} />
+      </div>
     </IonCard>
   );
 }

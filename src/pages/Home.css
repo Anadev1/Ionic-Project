@@ -27,3 +27,23 @@
      height: 300px;
      object-fit: cover;
  }
+
+ .comment-container {
+    display: flex;
+    width: 100%;
+}
+
+.comment-section {
+    padding: 1em 2em 1em;
+    color: var(--ion-color-primary-text);
+}
+
+.comment-btn {
+    height: 2.5em;
+    font-family: Open Sans, sans-serif;
+    font-size: 1.25em;
+    font-weight: 400;
+    margin: 0;
+    color: #000000;
+    background-color: transparent;
+}
