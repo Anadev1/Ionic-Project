@@ -27,6 +27,9 @@ export default function Add() {
   const [dogs, setDogs] = useState([]);
   const [user, setUser] = useState({});
 
+  console.log(dogs);
+  console.log(uploadImage)
+
   useEffect(() => {
     setUser(auth.currentUser);
     async function listenOnChange() {
@@ -76,7 +79,8 @@ export default function Add() {
      const url = await getDownloadURL(newImageRef);
      return url;
    }
-   let dogParams;
+  let dogParams;
+  
   return (
     <IonPage>
       <IonHeader>

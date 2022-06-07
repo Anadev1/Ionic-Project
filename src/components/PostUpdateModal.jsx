@@ -2,7 +2,6 @@ import {
   IonButton,
   IonHeader,
   IonToolbar,
-  IonTitle,
   IonButtons,
   IonContent,
   useIonLoading,
@@ -40,11 +39,12 @@ export default function PostUpdateModal({ post, dismiss }) {
   return (
     <IonContent>
       <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="secondary">
-            <IonButton onClick={() => dismiss()}>Cancel</IonButton>
+       
+        <IonToolbar className="topbar">
+          <IonButtons slot="start">
+            <IonButton className="back-btn" onClick={() => dismiss()}>Cancel</IonButton>
           </IonButtons>
-          <IonTitle>Edit Post</IonTitle>
+          <h1 className="topbar-title">Edit walk</h1>
         </IonToolbar>
       </IonHeader>
       <PostForm post={post} handleSubmit={updatePost} />

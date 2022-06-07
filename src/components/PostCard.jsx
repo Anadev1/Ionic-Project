@@ -12,7 +12,6 @@ import {
   IonAvatar,
   IonLabel,
   useIonModal,
-  IonList,
 } from "@ionic/react";
 import { ellipsisHorizontalOutline, time, locationSharp } from "ionicons/icons";
 import { Toast } from "@capacitor/toast";
@@ -23,56 +22,15 @@ import { ref, deleteObject } from "@firebase/storage";
 import { getAuth } from "firebase/auth";
 import placeholder from "../images/placeholder.jpg";
 import { useHistory } from "react-router";
-import CommentForm from "../components/CommentForm";
+/**** import CommentForm from "../components/CommentForm";
 import { postsRef, commentsRef } from "../firebase-config";
 import { push, set } from "firebase/database";
 import { useEffect, useState } from "react";
 import { onValue, get } from "firebase/database";
-import CommentListItem from "../components/CommentCard";
+import CommentListItem from "../components/CommentCard"; ****/
 
 
 export default function PostListItem({ post }) {
-
-  // Comments 
-  const [comments, setComments] = useState([]);
-
-  async function getPosts() {
-    const snapshot = await get(postsRef);
-    const postsArray = [];
-    snapshot.forEach((postSnapshot) => {
-      const id = postSnapshot.key;
-      const data = postSnapshot.val();
-      const post = {
-        id,
-        ...data,
-      };
-      postsArray.push(post);
-    });
-
-    return postsArray;
-  }
-
-  useEffect(() => {
-    async function listenOnChange() {
-      onValue(commentsRef, async (snapshot) => {
-        const posts = await getPosts();
-        const commentsArray = [];
-        snapshot.forEach((postSnapshot) => {
-          const id = postSnapshot.key;
-          const data = postSnapshot.val();
-          const post = {
-            id,
-            ...data,
-            post: posts.find((post) => post.id === data.uid),
-          };
-          commentsArray.push(post);
-        });
-        setComments(commentsArray.reverse());
-      });
-    }
-    listenOnChange();
-  }, []);
-
   // Edit, delete, user detail functionality
   const [presentActionSheet] = useIonActionSheet();
   const [presentDeleteDialog] = useIonAlert();
@@ -126,9 +84,46 @@ export default function PostListItem({ post }) {
     history.push(`users/${post.uid}`);
   }
 
+  /*** Comments 
   const auth = getAuth();
+  const [comments, setComments] = useState([]);
 
-  // Comments 
+  async function getPosts() {
+    const snapshot = await get(postsRef);
+    const postsArray = [];
+    snapshot.forEach((postSnapshot) => {
+      const id = postSnapshot.key;
+      const data = postSnapshot.val();
+      const post = {
+        id,
+        ...data,
+      };
+      postsArray.push(post);
+    });
+
+    return postsArray;
+  }
+
+  useEffect(() => {
+    async function listenOnChange() {
+      onValue(commentsRef, async (snapshot) => {
+        const posts = await getPosts();
+        const commentsArray = [];
+        snapshot.forEach((postSnapshot) => {
+          const id = postSnapshot.key;
+          const data = postSnapshot.val();
+          const post = {
+            id,
+            ...data,
+            post: posts.find((post) => post.id === data.uid),
+          };
+          commentsArray.push(post);
+        });
+        setComments(commentsArray.reverse());
+      });
+    }
+    listenOnChange();
+  }, []);
 
   async function handleSubmit(newComment) {
 
@@ -147,7 +142,8 @@ export default function PostListItem({ post }) {
         console.log(error);
       })
   }
-
+  
+  ****/
 
   return (
     <IonCard>
@@ -175,7 +171,7 @@ export default function PostListItem({ post }) {
         <div className="card-info">
           <div className="icon-container">
             <IonIcon className="card-icon" slot="icon-only" icon={time} />
-            <h6>{post.time}</h6>
+            <h6 className="date-info">{post.time}</h6>
           </div>
           <div className="icon-container">
             <IonIcon
@@ -189,7 +185,7 @@ export default function PostListItem({ post }) {
       </IonCardHeader>
       <IonCardContent>{post.description}</IonCardContent>
 
-      <div className="comment-section">
+      {/*<div className="comment-section">
         <h2>Comments</h2>
         <IonList className="ion-no-padding">
           {comments.map((comment) => (
@@ -197,7 +193,7 @@ export default function PostListItem({ post }) {
           ))}
         </IonList>
         <CommentForm handleSubmit={handleSubmit} />
-      </div>
+          </div> */}
     </IonCard>
   );
 }

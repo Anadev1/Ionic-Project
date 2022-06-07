@@ -84,8 +84,10 @@ export default function PostForm({ post, handleSubmit }) {
 
   return (
     <>
-       <div className="dog-header">
-          <h2 className="dogs-container-title">My Dog(s)</h2>
+      <div className="header-container">
+        <h3>Who's going on a walk today?</h3>
+        <p>Choose a dog from your profile OR enter the information manually below</p>
+          <h4 className="dogs-container-title">My Dog(s)</h4>
           <IonList className="ion-no-padding dogs-container">
             {dogs.map((dog) => (
                <DogListItem dog={dog} onClick={()=>{
@@ -100,8 +102,8 @@ export default function PostForm({ post, handleSubmit }) {
         </div>
         <form onSubmit={submitEvent}>
       <IonList>
-        <div className="header-container">
-          <h2>Who's going on a walk today?</h2>
+        <div className="camera-container">
+          
           <IonItem
             className="ion-no-padding"
             onClick={takePicture}
@@ -127,7 +129,8 @@ export default function PostForm({ post, handleSubmit }) {
               onIonChange={(e) => setDogName(e.target.value)}
               required
             />
-          </IonItem>
+            </IonItem>
+    
           <IonItem className="ion-no-padding">
             <IonLabel position="stacked">Date and time</IonLabel>
             <IonDatetime
