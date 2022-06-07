@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 180px;
+  width: 100px; 
 }
 
 .dog-profile-name {
@@ -17,7 +17,11 @@
 
 .dog-profile-photo {
   margin-bottom: 10px;
-  width: 100%;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .dog-profile-container {

@@ -46,6 +46,7 @@ export default function DogUpdateModal({ dog, dismiss }) {
           </IonButtons>
           <IonTitle>Edit dog profile</IonTitle>
         </IonToolbar>
+        
       </IonHeader>
       <DogForm post={dog} handleSubmit={updateDog} />
     </IonContent>

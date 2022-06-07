@@ -13,34 +13,68 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import { Camera, CameraResultType } from "@capacitor/camera";
 import { camera } from "ionicons/icons";
+import DogListItem from "../components/DogCard";
+import { dogsRef } from "../firebase-config";
+import { onValue } from "@firebase/database";
+import { getAuth } from "firebase/auth";
 
 export default function PostForm({ post, handleSubmit }) {
   const [dogName, setDogName] = useState("");
   const [time, setTime] = useState("");
   const [address, setAddress] = useState("");
-  // const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [imageFile, setImageFile] = useState({});
+  const [age, setAge] = useState("");
+  const [breed, setBreed] = useState("");
+  const [dogs, setDogs] = useState([]);
+  const [user, setUser] = useState({});
+  const auth = getAuth();
 
   useEffect(() => {
-    // async function getData() {
-    //   const url =
-    //     "https://api.dataforsyningen.dk/adresser?format=json&kommunekode=0751";
-    //   const response = await fetch(url);
-    //   const responseData = await response.json();
-    //   setData(responseData.data);
-    // }
-    // getData();
-
     if (post) {
       setDogName(post.dogName);
       setTime(post.time);
       setAddress(post.address);
       setDescription(post.description);
       setImage(post.image);
+      setAge(post.age);
+      setBreed(post.breed);
     }
-  }, [post]);
+    setUser(auth.currentUser);
+    async function listenOnChange() {
+      onValue(dogsRef, async (snapshot) => {
+        // const users = await getUsers();
+        const dogsArray = [];
+        snapshot.forEach((dogSnapshot) => {
+          const id = dogSnapshot.key;
+          const data = dogSnapshot.val();
+          const dog = {
+            id,
+            ...data,
+          };
+          if (user.uid === dog.id) {
+            dogsArray.push(dog);
+          }
+        });
+        setDogs(dogsArray.reverse());
+      });
+    }
+    listenOnChange();
+  }, [post, auth.currentUser, user]);
+
+  useEffect(() => {
+    async function getData() {
+      const url =
+        "https://api.dataforsyningen.dk/adresser?format=json&kommunekode=0751";
+      const response = await fetch(url);
+      const responseData = await response.json();
+      setData(responseData.data);
+    }
+    getData();
+  });
+
+  console.log(data);
 
   function submitEvent(event) {
     event.preventDefault();
@@ -49,12 +83,14 @@ export default function PostForm({ post, handleSubmit }) {
       time: time,
       address: address.value,
       description: description,
-      image: imageFile,
+      image: image,
+      age: age,
+      breed: breed,
     };
     handleSubmit(formData);
   }
 
-  async function takePicture() {
+  /* async function takePicture() {
     const imageOptions = {
       quality: 80,
       width: 500,
@@ -64,7 +100,7 @@ export default function PostForm({ post, handleSubmit }) {
     const image = await Camera.getPhoto(imageOptions);
     setImageFile(image);
     setImage(image.dataUrl);
-  }
+  } */
 
   const addresses = [
     {
@@ -119,84 +155,115 @@ export default function PostForm({ post, handleSubmit }) {
   ];
 
   return (
-    <form onSubmit={submitEvent}>
-      <IonList>
-        <div className="header-container">
-          <h2>Who's going on a walk today?</h2>
-          <IonItem
-            className="ion-no-padding"
-            onClick={takePicture}
-            lines="none"
-          >
-            <IonLabel className="add-headline">
-              Insert an image of your dog
-            </IonLabel>
-            <IonButton className="upload-btn">
-              <IonIcon className="upload-icon" slot="icon-only" icon={camera} />
+    <>
+      <div className="header-container">
+        <h3>Who's going on a walk today?</h3>
+        <h4 className="dogs-container-title">My Dog(s)</h4>
+        <IonList className="ion-no-padding dogs-container">
+          {dogs.map((dog) => (
+            <DogListItem
+              dog={dog}
+              onClick={() => {
+                setDogName(dog.name);
+                setImage(dog.image);
+                setAge(dog.age);
+                setBreed(dog.breed);
+                setDescription(dog.additionalInfo);
+              }}
+            />
+          ))}
+        </IonList>
+      </div>
+      <form onSubmit={submitEvent}>
+        <IonList>
+          <div className="camera-container">
+            {image && <IonImg className="add-img" src={image} />}
+          </div>
+          <div className="input-container">
+            <IonItem className="ion-no-padding">
+              <IonLabel position="stacked">The name of your dog</IonLabel>
+              <IonInput
+                value={dogName}
+                type="text"
+                onIonChange={(e) => setDogName(e.target.value)}
+                required
+              />
+            </IonItem>
+
+            <IonItem className="ion-no-padding">
+              <IonLabel position="stacked">Date and time</IonLabel>
+              <IonDatetime
+                locale="en-DA"
+                hour-cycle="h23"
+                minuteValues="0,15,30,45"
+                displayFormat="D MMM YYYY H:mm"
+                className="ion-no-padding"
+                value={time}
+                type="text"
+                onIonChange={(e) => setTime(e.target.value)}
+                required
+              />
+            </IonItem>
+            <IonItem className="ion-no-padding">
+              <IonLabel position="stacked">Age</IonLabel>
+              <IonInput
+                className="ion-no-padding"
+                value={age}
+                type="text"
+                onIonChange={(e) => setAge(e.target.value)}
+                required
+              />
+            </IonItem>
+            <IonItem className="ion-no-padding">
+              <IonLabel position="stacked">Breed</IonLabel>
+              <IonInput
+                className="ion-no-padding"
+                value={breed}
+                type="text"
+                onIonChange={(e) => setBreed(e.target.value)}
+                required
+              />
+            </IonItem>
+            <IonItem className="ion-no-padding">
+              <IonLabel position="stacked" className="add-label">
+                Additional information about the dog
+              </IonLabel>
+              <IonTextarea
+                className="add-textarea"
+                value={description}
+                type="text"
+                onIonChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </IonItem>
+          </div>
+        </IonList>
+        <IonLabel position="stacked" className="address-label">
+          Pick up address
+        </IonLabel>
+        <Select
+          onChange={setAddress}
+          options={addresses}
+          value={address}
+          className="add-address"
+        />
+        <div className="btn-container">
+          {dogName && time && address && description ? (
+            <IonButton className="save-btn" expand="block">
+              Save
             </IonButton>
-          </IonItem>
-          {image && (
-            <IonImg className="add-img" src={image} onClick={takePicture} />
+          ) : (
+            <IonButton
+              className="save-btn"
+              type="submit"
+              expand="block"
+              disabled
+            >
+              Save
+            </IonButton>
           )}
         </div>
-        <div className="input-container">
-          <IonItem className="ion-no-padding">
-            <IonLabel position="stacked">The name of your dog</IonLabel>
-            <IonInput
-              value={dogName}
-              type="text"
-              onIonChange={(e) => setDogName(e.target.value)}
-              required
-            />
-          </IonItem>
-          <IonItem className="ion-no-padding">
-            <IonLabel position="stacked">Date and time</IonLabel>
-            <IonDatetime
-              locale="en-DA"
-              hour-cycle="h23"
-              minuteValues="0,15,30,45"
-              displayFormat="D MMM YYYY H:mm"
-              className="ion-no-padding"
-              value={time}
-              type="text"
-              onIonChange={(e) => setTime(e.target.value)}
-              required
-            />
-          </IonItem>
-          <IonItem className="ion-no-padding">
-            <IonLabel position="stacked" className="add-label">
-              Additional information about the dog
-            </IonLabel>
-            <IonTextarea
-              className="add-textarea"
-              value={description}
-              type="text"
-              onIonChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </IonItem>
-        </div>
-      </IonList>
-      <IonLabel position="stacked" className="address-label">
-        Pick up address
-      </IonLabel>
-      <Select
-        onChange={setAddress}
-        options={addresses}
-        value={address}
-        className="add-address"
-      />
-      <div className="btn-container">
-        {dogName && time && address && description ? (
-          <IonButton className="save-btn" expand="block">
-            Save
-          </IonButton>
-        ) : (
-          <IonButton className="save-btn" type="submit" expand="block" disabled>
-            Save
-          </IonButton>
-        )}
-      </div>
-    </form>
+      </form>
+    </>
   );
 }

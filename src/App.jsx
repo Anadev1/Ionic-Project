@@ -39,6 +39,7 @@ import Start from "./pages/Start";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import UserPage from "./pages/UserPage";
 import DogProfile from "./pages/DogProfile";
 import ProfileSetup from "./pages/ProfileSetup";
 import DogProfileSetup from "./pages/DogProfileSetup";
@@ -58,6 +59,9 @@ function PrivateRoutes() {
         </Route>
         <Route exact path="/add">
           <Add />
+        </Route>
+        <Route path="/users/:id">
+          <UserPage />
         </Route>
         <Route exact path="/splash">
           <Splash />

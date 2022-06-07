@@ -114,7 +114,12 @@ export default function Profile() {
           <h2 className="dogs-container-title">My Dog(s)</h2>
           <IonList className="ion-no-padding dogs-container">
             {dogs.map((dog) => (
-              <DogListItem dog={dog} key={dog.name} />
+              <DogListItem dog={dog} key={dog.name} onClick={()=>{
+                history.push({
+                  pathname:"/dogprofile",
+                  state:{dog:dog}
+                })
+              }}/>
             ))}
 
             <IonIcon
