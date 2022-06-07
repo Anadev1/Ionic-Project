@@ -11,16 +11,13 @@ export default function PostForm({ post, handleSubmit }) {
   const [dogName, setDogName] = useState("");
   const [time, setTime] = useState("");
   const [address, setAddress] = useState("");
-   const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [imageFile, setImageFile] = useState({}); 
   const [age,setAge]=useState("");
   const [breed,setBreed]=useState("");
   const [dogs, setDogs] = useState([]);
   const [user, setUser] = useState({});
   const auth = getAuth();
-  console.log(image);
-  console.log(setImageFile);
 
   useEffect(() => {
     if (post) {
@@ -69,7 +66,7 @@ export default function PostForm({ post, handleSubmit }) {
   }
 
   
-  async function takePicture() {
+  /* async function takePicture() {
     const imageOptions = {
       quality: 80,
       width: 500,
@@ -79,14 +76,13 @@ export default function PostForm({ post, handleSubmit }) {
     const image = await Camera.getPhoto(imageOptions);
     setImageFile(image);
     setImage(image.dataUrl);
-  }
+  } */
 
 
   return (
     <>
       <div className="header-container">
         <h3>Who's going on a walk today?</h3>
-        <p>Choose a dog from your profile OR enter the information manually below</p>
           <h4 className="dogs-container-title">My Dog(s)</h4>
           <IonList className="ion-no-padding dogs-container">
             {dogs.map((dog) => (
@@ -103,21 +99,9 @@ export default function PostForm({ post, handleSubmit }) {
         <form onSubmit={submitEvent}>
       <IonList>
         <div className="camera-container">
-          
-          <IonItem
-            className="ion-no-padding"
-            onClick={takePicture}
-            lines="none"
-          >
-            <IonLabel className="add-headline">
-              Insert an image of your dog
-            </IonLabel>
-            <IonButton className="upload-btn">
-              <IonIcon className="upload-icon" slot="icon-only" icon={camera} />
-            </IonButton>
-          </IonItem>
+        
           {image && (
-            <IonImg className="add-img" src={image} onClick={takePicture} />
+            <IonImg className="add-img" src={image} />
           )}
         </div>
         <div className="input-container">
