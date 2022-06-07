@@ -67,8 +67,15 @@ export default function PostForm({ post, handleSubmit }) {
   }
 
   const addresses = [
-    { value: "Rosenhøj 66, 8260 Viby J", label: "Rosenhøj 66, 8260 Viby J" },
-    { value: "Egå Marina 327, 8250 Egå", label: "Egå Marina 327, 8250 Egå" },
+    {
+      value: "Rosenhøj 66, 8260 Viby J",
+      label: "Rosenhøj 66, 8260 Viby J",
+    },
+
+    {
+      value: "Egå Marina 327, 8250 Egå",
+      label: "Egå Marina 327, 8250 Egå",
+    },
     {
       value: "Jægergårdsgade 90A, 8000 Aarhus C",
       label: "Jægergårdsgade 90A, 8000 Aarhus C",
