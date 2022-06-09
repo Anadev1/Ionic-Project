@@ -4,15 +4,15 @@ import {
   IonButton,
   IonList,
   IonLabel,
-  IonIcon,
+  // IonIcon,
   IonImg,
   IonTextarea,
   IonDatetime,
 } from "@ionic/react";
 import { useState, useEffect } from "react";
 import Select from "react-select";
-import { Camera, CameraResultType } from "@capacitor/camera";
-import { camera } from "ionicons/icons";
+// import { Camera, CameraResultType } from "@capacitor/camera";
+// import { camera } from "ionicons/icons";
 import DogListItem from "../components/DogCard";
 import { dogsRef } from "../firebase-config";
 import { onValue } from "@firebase/database";
@@ -22,7 +22,7 @@ export default function PostForm({ post, handleSubmit }) {
   const [dogName, setDogName] = useState("");
   const [time, setTime] = useState("");
   const [address, setAddress] = useState("");
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [age, setAge] = useState("");
@@ -63,18 +63,18 @@ export default function PostForm({ post, handleSubmit }) {
     listenOnChange();
   }, [post, auth.currentUser, user]);
 
-  useEffect(() => {
-    async function getData() {
-      const url =
-        "https://api.dataforsyningen.dk/adresser?format=json&kommunekode=0751";
-      const response = await fetch(url);
-      const responseData = await response.json();
-      setData(responseData.data);
-    }
-    getData();
-  });
+  // useEffect(() => {
+  //   async function getData() {
+  //     const url =
+  //       "https://api.dataforsyningen.dk/adresser?format=json&kommunekode=0751";
+  //     const response = await fetch(url);
+  //     const responseData = await response.json();
+  //     setData(responseData.data);
+  //   }
+  //   getData();
+  // });
 
-  console.log(data);
+  // console.log(data);
 
   function submitEvent(event) {
     event.preventDefault();
