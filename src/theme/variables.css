@@ -65,8 +65,8 @@ http://ionicframework.com/docs/theming/ */
     font-family: Permanent Marker, sans-serif;
     color: var(--ion-color-primary);
 
-}
 
+}
 .topbar-title {
     display: flex;
     justify-content: center;

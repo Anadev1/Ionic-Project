@@ -1,7 +1,7 @@
-import { IonItem, IonInput, IonButton, IonList, IonLabel, IonIcon, IonImg, IonTextarea, IonDatetime} from "@ionic/react";
+import { IonItem, IonInput, IonButton, IonList, IonLabel, IonImg, IonTextarea, IonDatetime} from "@ionic/react";
 import { useState, useEffect } from "react";
-import { Camera, CameraResultType } from "@capacitor/camera";
-import { camera } from "ionicons/icons";
+//import { Camera, CameraResultType } from "@capacitor/camera";
+//import { camera } from "ionicons/icons";
 import DogListItem from "../components/DogCard";
 import {dogsRef } from "../firebase-config";
 import { onValue } from "@firebase/database";
